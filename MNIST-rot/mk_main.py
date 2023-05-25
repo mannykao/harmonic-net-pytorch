@@ -26,6 +26,7 @@ from torch.utils.data import Dataset, DataLoader
 
 from mkpyutils.testutil import time_spent
 from mk_mlutils.utils import torchutils
+from mldatasets.mnist.rotmnist import RotMNIST
 
 from mnistmodel import DeepMNIST # for rotation equivariant CNN
 from mnistmodel import RegularCNN # for regular CNN
@@ -188,8 +189,10 @@ def main(args):
 	device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 	print(device)
 	# creating train_loader and valid_loader
-	train_dataset = RotMNISTDataset(data['train_x'], data['train_y'])
-	valid_dataset = RotMNISTDataset(data['valid_x'], data['valid_y'])
+	#train_dataset = RotMNISTDataset(data['train_x'], data['train_y'])
+	#valid_dataset = RotMNISTDataset(data['valid_x'], data['valid_y'])
+	train_dataset = RotMNIST(split='train')
+	valid_dataset = RotMNIST(split='valid')
 	print(len(train_dataset), len(valid_dataset))
 
 	trainloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, drop_last=True)
