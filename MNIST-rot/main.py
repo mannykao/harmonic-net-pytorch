@@ -24,6 +24,8 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 
+from mk_mlutils.utils import torchutils
+
 from mnistmodel import DeepMNIST # for rotation equivariant CNN
 from mnistmodel import RegularCNN # for regular CNN
 
@@ -132,7 +134,7 @@ def settings(args):
 
    
    # Other options
-   args.n_epochs = 2000
+#   args.n_epochs = 50      #2000
    args.batch_size = 46
    args.learning_rate = 0.076
    args.std_mult = 0.7
@@ -150,8 +152,8 @@ def settings(args):
    args.n_classes = 10
    args.lr_div = 10.
    args.model_path = './models/'
-   args.train_mode = False
-   args.load_pretrained = True
+   args.train_mode = True
+   args.load_pretrained = False
    args.pretrained_model = './models/rotmnist_model.pth'
    args.log_path = create_dir('./logs')
    args.checkpoint_path = create_dir('./checkpoints') + '/model.ckpt'
@@ -180,6 +182,8 @@ def main(args):
    '''
    ##### SETUP AND LOAD DATA #####
    args, data = settings(args)
+
+   torchutils.onceInit(kCUDA=True, seed=1)
 
    # choosing the device to run the model
    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -217,7 +221,7 @@ def main(args):
    
    lossfn = torch.nn.CrossEntropyLoss() # defining the loss function
    print('No. of batches : ', len(trainloader))
-   print('Starting the training......')
+   print(f'Starting the training......{args.n_epochs}')
 
    val_best = 0.0
 
@@ -259,7 +263,8 @@ def main(args):
          epoch_acc = correct / (len(trainloader)*args.batch_size)
          epoch_loss /= len(train_dataset)
          current_lr = lr_scheduler.get_lr()[0]
-         print('Epoch: ', epoch+1, '; lr: ', current_lr, '; Loss: ', epoch_loss, '; Train Acc: ', epoch_acc, end = " ")
+         #print('Epoch: ', epoch+1, '; lr: ', current_lr, '; Loss: ', epoch_loss, '; Train Acc: ', epoch_acc, end = " ")
+         print(f"Epoch: {epoch+1} ; lr: {current_lr} ; Loss:  {epoch_loss} ; Train Acc: {epoch_acc}", end = " ")
 
       # Validation phase
       model.eval()
@@ -290,4 +295,5 @@ def main(args):
 if __name__ == '__main__':
    parser = argparse.ArgumentParser()
    parser.add_argument("--data_dir", help="data directory", default='./data')
+   parser.add_argument("--n_epochs", type=int, default=20)
    main(parser.parse_args())
