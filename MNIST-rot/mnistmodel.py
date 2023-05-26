@@ -12,6 +12,9 @@ import torch.nn.functional as F
 from hnet_lite import Conv2d, HNonlin, BatchNorm
 import hnet_lite as hn_lite
 
+from mk_mlutils.utils import torchutils
+
+
 class DeepMNIST(nn.Module):
     ''' Pytorch model class for Rot-Equivariant CNN'''
 
@@ -36,8 +39,7 @@ class DeepMNIST(nn.Module):
         self.nr = self.args.n_rings
 
         self.bias = torch.ones(self.ncl) * 1e-2
-        self.bias = torch.nn.Parameter(self.bias.type(
-            torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
+        self.bias = torch.nn.Parameter(self.bias.type(torchutils.FloatTensor))
 
         # defining convolutional layer objects
         self.conv2d_1_nf = Conv2d(1, self.nf, self.fs, padding=(self.fs-1)//2, n_rings=self.nr)

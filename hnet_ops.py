@@ -14,6 +14,7 @@ from torch import nn
 import torch.nn.functional as F
 from scipy.linalg import dft
 
+from mk_mlutils.utils import torchutils
 
 
 def h_conv(X, W, strides=(1,1,1,1), padding=0, max_order=1):
@@ -55,8 +56,8 @@ def h_conv(X, W, strides=(1,1,1,1), padding=0, max_order=1):
             sign = np.sign(weight_order)
 
             if Xsh[4] == 2:
-                Wr += [weights[0],-sign*weights[1]]
-                Wi += [sign*weights[1],weights[0]]
+                Wr += [weights[0], -sign*weights[1]]
+                Wi += [sign*weights[1], weights[0]]
             else:
                 Wr += [weights[0]]
                 Wi += [weights[1]]
@@ -66,15 +67,14 @@ def h_conv(X, W, strides=(1,1,1,1), padding=0, max_order=1):
 
     # Convolving the constructed weights and feature map
     W_ = W_.permute(3, 2, 0, 1)
-    W_ = W_.type(torch.cuda.FloatTensor) if torch.cuda.is_available() \
-                                            else W_.type(torch.FloatTensor)
+    W_ = W_.type(torchutils.FloatTensor)
     
     X_ = X_.permute(0, 3, 1, 2)
     Y = torch.nn.functional.conv2d(X_, W_, stride=strides, padding=padding)
     Y = Y.permute(0, 2, 3, 1)
     # Reshae results into appropriate format
     Ysh = list(Y.size())
-    new_shape = Ysh[:3] + [max_order+1,2] + [Ysh[3]//(2*(max_order+1))]
+    new_shape = Ysh[:3] + [max_order+1, 2] + [Ysh[3]//(2*(max_order+1))]
     Y = Y.view(*new_shape)
     return Y
 
@@ -160,9 +160,9 @@ def get_interpolation_weights(fs, m, n_rings=None):
     coords = get_l2_neighbors(center_pt, fs)
 
     # getting samples based on the choisen center_pt and the coords
-    radii = radii[:,np.newaxis,np.newaxis,np.newaxis]
-    ring_locations = ring_locations[np.newaxis,:,:,np.newaxis]
-    diff = radii*ring_locations - coords[np.newaxis,:,np.newaxis,:]
+    radii = radii[:, np.newaxis, np.newaxis, np.newaxis]
+    ring_locations = ring_locations[np.newaxis, :, :, np.newaxis]
+    diff = radii*ring_locations - coords[np.newaxis, :, np.newaxis, :]
     dist2 = np.sum(diff**2, axis=1)
 
     # Convert distances to weightings
@@ -173,7 +173,7 @@ def get_interpolation_weights(fs, m, n_rings=None):
     return norm_weights
 
 
-def get_filter_weights(R_dict, fs, P=None, n_rings=None):
+def get_filter_weights(R_dict, fs, P=None, n_rings=None, device="cuda"):
     '''
     Calculates filters in the form of weight matrices through performing
     single-frequency DFT on every ring obtained from sampling in the polar 
@@ -205,9 +205,9 @@ def get_filter_weights(R_dict, fs, P=None, n_rings=None):
         # Arranging the two components in a manner that they can be directly
         #  multiplied with the steerable weights
         cos_comp = torch.from_numpy(cos_comp)
-        cos_comp = cos_comp.to(device="cuda" if torch.cuda.is_available() else "cpu")
+        cos_comp = cos_comp.to(device=device)
         sin_comp = torch.from_numpy(sin_comp)
-        sin_comp = sin_comp.to(device="cuda" if torch.cuda.is_available() else "cpu")
+        sin_comp = sin_comp.to(device=device)
 
         # Computng the projetions on the rotational basis
         r = r.view(rsh[0],rsh[1]*rsh[2])
@@ -235,7 +235,7 @@ def get_sample_count(fs):
         n_samples: numeber of points to be sampled on the grid
     '''
 
-    n_samples = np.maximum(np.ceil(np.pi*fs),101)
+    n_samples = np.maximum(np.ceil(np.pi*fs), 101)
     return n_samples
 
 

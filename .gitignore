@@ -132,3 +132,4 @@ dmypy.json
 MNIST-rot/models
 mldatasets/datasets/mnist/MNIST
 mldatasets/datasets/rotmnist/rotMNIST
+mldatasets/datasets/bsd500/bsd500

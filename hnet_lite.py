@@ -19,6 +19,8 @@ from torch import nn
 from hnet_ops import *
 from hnet_ops import h_conv
 
+from mk_mlutils.utils import torchutils
+
 class Conv2d(nn.Module):
     '''Defining custom convolutional layer'''
 
@@ -98,7 +100,7 @@ class Conv2d(nn.Module):
         return phase_dict
 
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, phase=True,
-             max_order=1, stddev=0.4, n_rings=None):
+             max_order=1, stddev=0.4, n_rings=None, device="cuda"):
         super().__init__()
         '''
         initializer function for Harmonic convolution lite wrapper class
@@ -126,6 +128,7 @@ class Conv2d(nn.Module):
         self.max_order = max_order
         self.stddev = stddev
         self.n_rings = n_rings
+        self.device = device
         self.shape = (kernel_size, kernel_size, self.in_channels, self.out_channels)
         self.Q = Conv2d.init_weights_dict(self.shape, self.max_order, self.stddev, self.n_rings)
         for k, v in self.Q.items():
@@ -148,7 +151,7 @@ class Conv2d(nn.Module):
             R (torch tensor): output feature tensor obtained from harmonic convolution 
         '''
         
-        W = get_filter_weights(self.Q, fs=self.kernel_size, P=self.P, n_rings=self.n_rings)
+        W = get_filter_weights(self.Q, fs=self.kernel_size, P=self.P, n_rings=self.n_rings, device=self.device)
         R = h_conv(X, W, strides=self.stride, padding=self.padding, max_order=self.max_order)
         return R
 
@@ -178,7 +181,7 @@ class HNonlin(nn.Module):
         self.eps = eps
 
         # creating bias parameter to add and initializing using xavier normal method
-        self.b = nn.Parameter(torch.FloatTensor(1,1,1,rotation_order,1,channels))
+        self.b = nn.Parameter(torch.FloatTensor(1,1,1, rotation_order, 1, channels))
         nn.init.xavier_normal_(self.b)
 
     def forward(self, X):
@@ -218,7 +221,7 @@ class BatchNorm(nn.Module):
         super().__init__()
         self.fnc = fnc
         self.eps = eps
-        self.n_out = rotation_order,cmplx,channels
+        self.n_out = rotation_order, cmplx, channels
         self.tn_out = rotation_order*cmplx*channels
         self.bn = nn.BatchNorm1d(self.tn_out, eps=self.eps, momentum=1-decay)
 
