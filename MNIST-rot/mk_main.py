@@ -26,7 +26,8 @@ from torch.utils.data import Dataset, DataLoader
 
 from mkpyutils.testutil import time_spent
 from mk_mlutils.utils import torchutils
-from mldatasets.mnist.rotmnist import RotMNIST
+#from mldatasets.mnist.rotmnist import RotMNIST
+from datasets.rotmnist import rotmnist
 
 from mnistmodel import DeepMNIST # for rotation equivariant CNN
 from mnistmodel import RegularCNN # for regular CNN
@@ -67,6 +68,23 @@ class RotMNISTDataset(Dataset):
 		image_sample = self.image_set[idx]
 		label_sample = self.label_set[idx]
 		return image_sample, label_sample
+
+if False:
+	class RotMNISTDataset(rotmnist.RotMNIST):
+		def __init__(self,
+			name="RotMNIST", 
+			split:str="train",
+			seed=0,
+		):
+			super().__init__(name, split=split)
+
+			self.image_set = torch.from_numpy(self.images)
+			self.label_set = torch.from_numpy(np.asarray(self.labels, dtype=np.int64))
+
+		def __getitem__(self, idx):
+			image_sample = self.image_set[idx]
+			label_sample = self.label_set[idx]
+			return image_sample, label_sample
 
 
 def download2FileAndExtract(url, folder, fileName):
@@ -191,8 +209,8 @@ def main(args):
 	# creating train_loader and valid_loader
 	#train_dataset = RotMNISTDataset(data['train_x'], data['train_y'])
 	#valid_dataset = RotMNISTDataset(data['valid_x'], data['valid_y'])
-	train_dataset = RotMNIST(split='train')
-	valid_dataset = RotMNIST(split='valid')
+	train_dataset = rotmnist.RotMNIST(split='train')
+	valid_dataset = rotmnist.RotMNIST(split='valid')
 	print(len(train_dataset), len(valid_dataset))
 
 	trainloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, drop_last=True)
