@@ -1,0 +1,3 @@
+[submodule "mkpypl"]
+	path = mkpypl
+	url = git@github.com:mannykao/mkpypl.git
