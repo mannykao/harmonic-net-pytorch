@@ -1,0 +1,311 @@
+60E, cpu
+--------
+Epoch:  1 ; lr:  0.0038009499999999865 ; Loss:  2.7724163654327394 ; Train Acc:  0.38359046283309955 ; Val. Acc:  0.3276036400404449 ; Best:  0.3276036400404449
+Epoch:  2 ; lr:  0.0038009499999999865 ; Loss:  1.2458242610931396 ; Train Acc:  0.6108996193147666 ; Val. Acc:  0.365520728008089 ; Best:  0.365520728008089
+Epoch:  3 ; lr:  0.0038009499999999865 ; Loss:  0.9075483165740966 ; Train Acc:  0.7130835503907033 ; Val. Acc:  0.36754297269969666 ; Best:  0.36754297269969666
+Epoch:  4 ; lr:  0.0038009499999999865 ; Loss:  0.6396415513038636 ; Train Acc:  0.8011420557002604 ; Val. Acc:  0.6718907987866531 ; Best:  0.6718907987866531
+Epoch:  5 ; lr:  0.0038009499999999865 ; Loss:  0.5728194143295288 ; Train Acc:  0.8211781206171108 ; Val. Acc:  0.6966632962588474 ; Best:  0.6966632962588474
+Epoch:  6 ; lr:  0.0038009499999999865 ; Loss:  0.4675192280769348 ; Train Acc:  0.8544379883790824 ; Val. Acc:  0.5854398382204247 ; Best:  0.6966632962588474
+Epoch:  7 ; lr:  0.0038009499999999865 ; Loss:  0.4595845254421234 ; Train Acc:  0.8545381687036666 ; Val. Acc:  0.5025278058645096 ; Best:  0.6966632962588474
+Epoch:  8 ; lr:  0.0038009499999999865 ; Loss:  0.42807392559051516 ; Train Acc:  0.8675616108996194 ; Val. Acc:  0.8179979777553084 ; Best:  0.8179979777553084
+Epoch:  9 ; lr:  0.0038009499999999865 ; Loss:  0.3698063636302948 ; Train Acc:  0.8840913644560209 ; Val. Acc:  0.7795753286147624 ; Best:  0.8179979777553084
+Epoch:  10 ; lr:  0.0038009499999999865 ; Loss:  0.3724855027198791 ; Train Acc:  0.880184331797235 ; Val. Acc:  0.8179979777553084 ; Best:  0.8179979777553084
+Epoch:  11 ; lr:  0.0038009499999999865 ; Loss:  0.347320692896843 ; Train Acc:  0.8911039871769184 ; Val. Acc:  0.7871587462082912 ; Best:  0.8179979777553084
+Epoch:  12 ; lr:  0.0038009499999999865 ; Loss:  0.358302086520195 ; Train Acc:  0.8886996593868964 ; Val. Acc:  0.8215369059656218 ; Best:  0.8215369059656218
+Epoch:  13 ; lr:  0.0038009499999999865 ; Loss:  0.3341609230041504 ; Train Acc:  0.894109396914446 ; Val. Acc:  0.8336703741152679 ; Best:  0.8336703741152679
+Epoch:  14 ; lr:  0.0038009499999999865 ; Loss:  0.2989475522518158 ; Train Acc:  0.9062312161891405 ; Val. Acc:  0.8174924165824065 ; Best:  0.8336703741152679
+Epoch:  15 ; lr:  0.0038009499999999865 ; Loss:  0.32422485435009 ; Train Acc:  0.8989180524944901 ; Val. Acc:  0.8326592517694641 ; Best:  0.8336703741152679
+Epoch:  16 ; lr:  0.0038009499999999865 ; Loss:  0.28787023639678955 ; Train Acc:  0.9077339210579042 ; Val. Acc:  0.8725985844287159 ; Best:  0.8725985844287159
+Epoch:  17 ; lr:  0.0038009499999999865 ; Loss:  0.30930852105617523 ; Train Acc:  0.9032258064516129 ; Val. Acc:  0.7942366026289182 ; Best:  0.8725985844287159
+Epoch:  18 ; lr:  0.0038009499999999865 ; Loss:  0.271483331489563 ; Train Acc:  0.9095371669004207 ; Val. Acc:  0.8771486349848332 ; Best:  0.8771486349848332
+Epoch:  19 ; lr:  0.0038009499999999865 ; Loss:  0.23641266437768937 ; Train Acc:  0.9270687237026648 ; Val. Acc:  0.7492416582406471 ; Best:  0.8771486349848332
+Epoch:  20 ; lr:  0.0038009499999999865 ; Loss:  0.24582611600160598 ; Train Acc:  0.9198557403325986 ; Val. Acc:  0.8579373104145601 ; Best:  0.8771486349848332
+Epoch:  21 ; lr:  0.0038009499999999865 ; Loss:  0.23499450330734253 ; Train Acc:  0.923161691043879 ; Val. Acc:  0.8498483316481295 ; Best:  0.8771486349848332
+Epoch:  22 ; lr:  0.0038009499999999865 ; Loss:  0.22609121644496918 ; Train Acc:  0.923562412342216 ; Val. Acc:  0.8599595551061678 ; Best:  0.8771486349848332
+Epoch:  23 ; lr:  0.0038009499999999865 ; Loss:  0.237335045170784 ; Train Acc:  0.9240633139651373 ; Val. Acc:  0.8518705763397371 ; Best:  0.8771486349848332
+Epoch:  24 ; lr:  0.0038009499999999865 ; Loss:  0.25018976916074753 ; Train Acc:  0.9216589861751152 ; Val. Acc:  0.8872598584428716 ; Best:  0.8872598584428716
+Epoch:  25 ; lr:  0.0038009499999999865 ; Loss:  0.23265150552988054 ; Train Acc:  0.923161691043879 ; Val. Acc:  0.8832153690596563 ; Best:  0.8872598584428716
+Epoch:  26 ; lr:  0.0038009499999999865 ; Loss:  0.21412494441866875 ; Train Acc:  0.9298737727910238 ; Val. Acc:  0.7684529828109201 ; Best:  0.8872598584428716
+Epoch:  27 ; lr:  0.0038009499999999865 ; Loss:  0.2486125814795494 ; Train Acc:  0.9184532157884192 ; Val. Acc:  0.845803842264914 ; Best:  0.8872598584428716
+Epoch:  28 ; lr:  0.0038009499999999865 ; Loss:  0.21189430105686188 ; Train Acc:  0.9306752153876978 ; Val. Acc:  0.8377148634984833 ; Best:  0.8872598584428716
+Epoch:  29 ; lr:  0.0038009499999999865 ; Loss:  0.20091958825588227 ; Train Acc:  0.935083149669405 ; Val. Acc:  0.8235591506572295 ; Best:  0.8872598584428716
+Epoch:  30 ; lr:  0.0038009499999999865 ; Loss:  0.20694726840257643 ; Train Acc:  0.9327790022039671 ; Val. Acc:  0.8751263902932255 ; Best:  0.8872598584428716
+Epoch:  31 ; lr:  0.0038009499999999865 ; Loss:  0.1798223488330841 ; Train Acc:  0.9393909036265278 ; Val. Acc:  0.884732052578362 ; Best:  0.8872598584428716
+Epoch:  32 ; lr:  0.0038009499999999865 ; Loss:  0.18685145496726036 ; Train Acc:  0.9379883790823482 ; Val. Acc:  0.8488372093023255 ; Best:  0.8872598584428716
+Epoch:  33 ; lr:  0.0038009499999999865 ; Loss:  0.18274015598893165 ; Train Acc:  0.9419955920657183 ; Val. Acc:  0.8407482305358949 ; Best:  0.8872598584428716
+Epoch:  34 ; lr:  0.0038009499999999865 ; Loss:  0.17456285522580148 ; Train Acc:  0.942296133039471 ; Val. Acc:  0.9044489383215369 ; Best:  0.9044489383215369
+Epoch:  35 ; lr:  0.0038009499999999865 ; Loss:  0.161412010037899 ; Train Acc:  0.9494089360849529 ; Val. Acc:  0.7153690596562184 ; Best:  0.9044489383215369
+Epoch:  36 ; lr:  0.0038009499999999865 ; Loss:  0.19770868446230888 ; Train Acc:  0.9337808054498097 ; Val. Acc:  0.8387259858442871 ; Best:  0.9044489383215369
+Epoch:  37 ; lr:  0.0038009499999999865 ; Loss:  0.14469759161174298 ; Train Acc:  0.9525145261470647 ; Val. Acc:  0.8933265925176946 ; Best:  0.9044489383215369
+Epoch:  38 ; lr:  0.0038009499999999865 ; Loss:  0.14731462014615535 ; Train Acc:  0.9504107393307955 ; Val. Acc:  0.8468149646107179 ; Best:  0.9044489383215369
+Epoch:  39 ; lr:  0.0038009499999999865 ; Loss:  0.1671702333688736 ; Train Acc:  0.9456020837507514 ; Val. Acc:  0.9019211324570273 ; Best:  0.9044489383215369
+Epoch:  40 ; lr:  0.0038009499999999865 ; Loss:  0.15506140218377112 ; Train Acc:  0.9472049689440993 ; Val. Acc:  0.8988877654196158 ; Best:  0.9044489383215369
+Epoch:  41 ; lr:  0.0038009499999999865 ; Loss:  0.1353416185170412 ; Train Acc:  0.9551192145862553 ; Val. Acc:  0.910010111223458 ; Best:  0.910010111223458
+Epoch:  42 ; lr:  0.0038009499999999865 ; Loss:  0.15862807734012604 ; Train Acc:  0.9456020837507514 ; Val. Acc:  0.8827098078867543 ; Best:  0.910010111223458
+Epoch:  43 ; lr:  0.0038009499999999865 ; Loss:  0.1569475285768509 ; Train Acc:  0.9466038869965939 ; Val. Acc:  0.897876643073812 ; Best:  0.910010111223458
+Epoch:  44 ; lr:  0.0038009499999999865 ; Loss:  0.14056164549589156 ; Train Acc:  0.9526147064716489 ; Val. Acc:  0.890798786653185 ; Best:  0.910010111223458
+Epoch:  45 ; lr:  0.0038009499999999865 ; Loss:  0.16472497209906578 ; Train Acc:  0.9437988379082348 ; Val. Acc:  0.8948432760364005 ; Best:  0.910010111223458
+Epoch:  46 ; lr:  0.0038009499999999865 ; Loss:  0.1398976727604866 ; Train Acc:  0.9527148867962332 ; Val. Acc:  0.9004044489383215 ; Best:  0.910010111223458
+Epoch:  47 ; lr:  0.0038009499999999865 ; Loss:  0.12899428863823414 ; Train Acc:  0.9559206571829293 ; Val. Acc:  0.878159757330637 ; Best:  0.910010111223458
+Epoch:  48 ; lr:  0.0038009499999999865 ; Loss:  0.14608475420475006 ; Train Acc:  0.9511120016028852 ; Val. Acc:  0.8827098078867543 ; Best:  0.910010111223458
+Epoch:  49 ; lr:  0.0038009499999999865 ; Loss:  0.11008822352290154 ; Train Acc:  0.9626327389300742 ; Val. Acc:  0.9110212335692619 ; Best:  0.9110212335692619
+Epoch:  50 ; lr:  0.0038009499999999865 ; Loss:  0.11734179762601853 ; Train Acc:  0.9594269685433781 ; Val. Acc:  0.8498483316481295 ; Best:  0.9110212335692619
+Epoch:  51 ; lr:  0.0038009499999999865 ; Loss:  0.11648973689079285 ; Train Acc:  0.9609296734121419 ; Val. Acc:  0.8710819009100101 ; Best:  0.9110212335692619
+Epoch:  52 ; lr:  0.0038009499999999865 ; Loss:  0.12207958115786315 ; Train Acc:  0.9599278701662993 ; Val. Acc:  0.9074823053589485 ; Best:  0.9110212335692619
+Epoch:  53 ; lr:  0.0038009499999999865 ; Loss:  0.10016136411204934 ; Train Acc:  0.9647365257463434 ; Val. Acc:  0.916582406471183 ; Best:  0.916582406471183
+Epoch:  54 ; lr:  0.0038009499999999865 ; Loss:  0.11136814322769642 ; Train Acc:  0.9624323782809057 ; Val. Acc:  0.9014155712841254 ; Best:  0.916582406471183
+Epoch:  55 ; lr:  0.0038009499999999865 ; Loss:  0.10229461867809296 ; Train Acc:  0.9657383289921859 ; Val. Acc:  0.89737108190091 ; Best:  0.916582406471183
+Epoch:  56 ; lr:  0.0038009499999999865 ; Loss:  0.20724719482436776 ; Train Acc:  0.9352835103185735 ; Val. Acc:  0.8422649140546006 ; Best:  0.916582406471183
+Epoch:  57 ; lr:  0.0038009499999999865 ; Loss:  0.13931548761129378 ; Train Acc:  0.9545181326387497 ; Val. Acc:  0.8710819009100101 ; Best:  0.916582406471183
+Epoch:  58 ; lr:  0.0038009499999999865 ; Loss:  0.09247840641587973 ; Train Acc:  0.9703466239230615 ; Val. Acc:  0.8933265925176946 ; Best:  0.916582406471183
+Epoch:  59 ; lr:  0.0038009499999999865 ; Loss:  0.10270756904631853 ; Train Acc:  0.9650370667200961 ; Val. Acc:  0.9120323559150657 ; Best:  0.916582406471183
+Epoch:  60 ; lr:  0.0038009499999999865 ; Loss:  0.10001180808395148 ; Train Acc:  0.9658385093167702 ; Val. Acc:  0.9261880687563195 ; Best:  0.9261880687563195
+
+60E, gpu
+--------
+Epoch: 1 ; lr: 0.0038 ; Loss:  2.8766 ; Train Acc: 0.3669 time spend on train method = 14.29s
+; Val. Acc: 0.2144 ; Best: 0.214358 time spend on validate method = 1.45s
+Epoch: 2 ; lr: 0.0038 ; Loss:  1.3231 ; Train Acc: 0.5753 time spend on train method = 11.99s
+; Val. Acc: 0.5758 ; Best: 0.575834 time spend on validate method = 1.43s
+Epoch: 3 ; lr: 0.0038 ; Loss:  0.8092 ; Train Acc: 0.7406 time spend on train method = 12.10s
+; Val. Acc: 0.5940 ; Best: 0.594034 time spend on validate method = 1.54s
+Epoch: 4 ; lr: 0.0038 ; Loss:  0.7071 ; Train Acc: 0.7777 time spend on train method = 12.36s
+; Val. Acc: 0.6557 ; Best: 0.655713 time spend on validate method = 1.45s
+Epoch: 5 ; lr: 0.0038 ; Loss:  0.6048 ; Train Acc: 0.8099 time spend on train method = 12.13s
+; Val. Acc: 0.7336 ; Best: 0.733569 time spend on validate method = 1.43s
+Epoch: 6 ; lr: 0.0038 ; Loss:  0.5368 ; Train Acc: 0.8343 time spend on train method = 12.05s
+; Val. Acc: 0.6967 ; Best: 0.733569 time spend on validate method = 1.43s
+Epoch: 7 ; lr: 0.0038 ; Loss:  0.4964 ; Train Acc: 0.8405 time spend on train method = 13.13s
+; Val. Acc: 0.7088 ; Best: 0.733569 time spend on validate method = 1.50s
+Epoch: 8 ; lr: 0.0038 ; Loss:  0.4184 ; Train Acc: 0.8720 time spend on train method = 14.60s
+; Val. Acc: 0.6653 ; Best: 0.733569 time spend on validate method = 1.47s
+Epoch: 9 ; lr: 0.0038 ; Loss:  0.4442 ; Train Acc: 0.8641 time spend on train method = 15.01s
+; Val. Acc: 0.8084 ; Best: 0.808392 time spend on validate method = 1.50s
+Epoch: 10 ; lr: 0.0038 ; Loss:  0.3784 ; Train Acc: 0.8817 time spend on train method = 14.81s
+; Val. Acc: 0.8665 ; Best: 0.866532 time spend on validate method = 1.48s
+Epoch: 11 ; lr: 0.0038 ; Loss:  0.3662 ; Train Acc: 0.8864 time spend on train method = 15.03s
+; Val. Acc: 0.8155 ; Best: 0.866532 time spend on validate method = 1.48s
+Epoch: 12 ; lr: 0.0038 ; Loss:  0.4038 ; Train Acc: 0.8736 time spend on train method = 14.82s
+; Val. Acc: 0.4990 ; Best: 0.866532 time spend on validate method = 1.55s
+Epoch: 13 ; lr: 0.0038 ; Loss:  0.3619 ; Train Acc: 0.8850 time spend on train method = 14.86s
+; Val. Acc: 0.8605 ; Best: 0.866532 time spend on validate method = 1.47s
+Epoch: 14 ; lr: 0.0038 ; Loss:  0.3049 ; Train Acc: 0.9048 time spend on train method = 14.58s
+; Val. Acc: 0.7740 ; Best: 0.866532 time spend on validate method = 1.48s
+Epoch: 15 ; lr: 0.0038 ; Loss:  0.2956 ; Train Acc: 0.9058 time spend on train method = 14.03s
+; Val. Acc: 0.7381 ; Best: 0.866532 time spend on validate method = 1.47s
+Epoch: 16 ; lr: 0.0038 ; Loss:  0.3152 ; Train Acc: 0.8996 time spend on train method = 12.75s
+; Val. Acc: 0.7907 ; Best: 0.866532 time spend on validate method = 1.48s
+Epoch: 17 ; lr: 0.0038 ; Loss:  0.2925 ; Train Acc: 0.9081 time spend on train method = 12.04s
+; Val. Acc: 0.8261 ; Best: 0.866532 time spend on validate method = 1.47s
+Epoch: 18 ; lr: 0.0038 ; Loss:  0.2842 ; Train Acc: 0.9089 time spend on train method = 12.05s
+; Val. Acc: 0.8337 ; Best: 0.866532 time spend on validate method = 1.42s
+Epoch: 19 ; lr: 0.0038 ; Loss:  0.2731 ; Train Acc: 0.9114 time spend on train method = 12.36s
+; Val. Acc: 0.8165 ; Best: 0.866532 time spend on validate method = 1.42s
+Epoch: 20 ; lr: 0.0038 ; Loss:  0.2570 ; Train Acc: 0.9174 time spend on train method = 12.11s
+; Val. Acc: 0.8377 ; Best: 0.866532 time spend on validate method = 1.45s
+Epoch: 21 ; lr: 0.0038 ; Loss:  0.2697 ; Train Acc: 0.9144 time spend on train method = 11.93s
+; Val. Acc: 0.8387 ; Best: 0.866532 time spend on validate method = 1.42s
+Epoch: 22 ; lr: 0.0038 ; Loss:  0.2591 ; Train Acc: 0.9169 time spend on train method = 11.86s
+; Val. Acc: 0.8726 ; Best: 0.872599 time spend on validate method = 1.45s
+Epoch: 23 ; lr: 0.0038 ; Loss:  0.2372 ; Train Acc: 0.9242 time spend on train method = 11.91s
+; Val. Acc: 0.8433 ; Best: 0.872599 time spend on validate method = 1.42s
+Epoch: 24 ; lr: 0.0038 ; Loss:  0.2319 ; Train Acc: 0.9236 time spend on train method = 11.88s
+; Val. Acc: 0.7401 ; Best: 0.872599 time spend on validate method = 1.41s
+Epoch: 25 ; lr: 0.0038 ; Loss:  0.2369 ; Train Acc: 0.9243 time spend on train method = 11.82s
+; Val. Acc: 0.8741 ; Best: 0.874115 time spend on validate method = 1.42s
+Epoch: 26 ; lr: 0.0038 ; Loss:  0.2108 ; Train Acc: 0.9318 time spend on train method = 11.88s
+; Val. Acc: 0.8544 ; Best: 0.874115 time spend on validate method = 1.43s
+Epoch: 27 ; lr: 0.0038 ; Loss:  0.2361 ; Train Acc: 0.9234 time spend on train method = 11.86s
+; Val. Acc: 0.8589 ; Best: 0.874115 time spend on validate method = 1.41s
+Epoch: 28 ; lr: 0.0038 ; Loss:  0.2420 ; Train Acc: 0.9200 time spend on train method = 11.86s
+; Val. Acc: 0.7877 ; Best: 0.874115 time spend on validate method = 1.42s
+Epoch: 29 ; lr: 0.0038 ; Loss:  0.2168 ; Train Acc: 0.9309 time spend on train method = 11.84s
+; Val. Acc: 0.8953 ; Best: 0.895349 time spend on validate method = 1.43s
+Epoch: 30 ; lr: 0.0038 ; Loss:  0.1877 ; Train Acc: 0.9403 time spend on train method = 11.90s
+; Val. Acc: 0.8600 ; Best: 0.895349 time spend on validate method = 1.42s
+Epoch: 31 ; lr: 0.0038 ; Loss:  0.2126 ; Train Acc: 0.9333 time spend on train method = 11.82s
+; Val. Acc: 0.9110 ; Best: 0.911021 time spend on validate method = 1.43s
+Epoch: 32 ; lr: 0.0038 ; Loss:  0.1977 ; Train Acc: 0.9352 time spend on train method = 11.84s
+; Val. Acc: 0.8969 ; Best: 0.911021 time spend on validate method = 1.42s
+Epoch: 33 ; lr: 0.0038 ; Loss:  0.1617 ; Train Acc: 0.9476 time spend on train method = 11.84s
+; Val. Acc: 0.8281 ; Best: 0.911021 time spend on validate method = 1.42s
+Epoch: 34 ; lr: 0.0038 ; Loss:  0.1802 ; Train Acc: 0.9395 time spend on train method = 11.88s
+; Val. Acc: 0.7907 ; Best: 0.911021 time spend on validate method = 1.43s
+Epoch: 35 ; lr: 0.0038 ; Loss:  0.1711 ; Train Acc: 0.9424 time spend on train method = 11.85s
+; Val. Acc: 0.8099 ; Best: 0.911021 time spend on validate method = 1.43s
+Epoch: 36 ; lr: 0.0038 ; Loss:  0.1789 ; Train Acc: 0.9401 time spend on train method = 11.80s
+; Val. Acc: 0.9065 ; Best: 0.911021 time spend on validate method = 1.43s
+Epoch: 37 ; lr: 0.0038 ; Loss:  0.1654 ; Train Acc: 0.9466 time spend on train method = 11.88s
+; Val. Acc: 0.8372 ; Best: 0.911021 time spend on validate method = 1.43s
+Epoch: 38 ; lr: 0.0038 ; Loss:  0.1690 ; Train Acc: 0.9458 time spend on train method = 11.83s
+; Val. Acc: 0.7887 ; Best: 0.911021 time spend on validate method = 1.42s
+Epoch: 39 ; lr: 0.0038 ; Loss:  0.1979 ; Train Acc: 0.9367 time spend on train method = 12.79s
+; Val. Acc: 0.8569 ; Best: 0.911021 time spend on validate method = 1.47s
+Epoch: 40 ; lr: 0.0038 ; Loss:  0.1504 ; Train Acc: 0.9494 time spend on train method = 14.99s
+; Val. Acc: 0.7679 ; Best: 0.911021 time spend on validate method = 1.47s
+Epoch: 41 ; lr: 0.0038 ; Loss:  0.1765 ; Train Acc: 0.9409 time spend on train method = 14.55s
+; Val. Acc: 0.8933 ; Best: 0.911021 time spend on validate method = 1.47s
+Epoch: 42 ; lr: 0.0038 ; Loss:  0.1528 ; Train Acc: 0.9475 time spend on train method = 14.51s
+; Val. Acc: 0.9211 ; Best: 0.921132 time spend on validate method = 1.47s
+Epoch: 43 ; lr: 0.0038 ; Loss:  0.1648 ; Train Acc: 0.9467 time spend on train method = 15.22s
+; Val. Acc: 0.8691 ; Best: 0.921132 time spend on validate method = 1.51s
+Epoch: 44 ; lr: 0.0038 ; Loss:  0.1545 ; Train Acc: 0.9473 time spend on train method = 15.29s
+; Val. Acc: 0.9100 ; Best: 0.921132 time spend on validate method = 1.51s
+Epoch: 45 ; lr: 0.0038 ; Loss:  0.1513 ; Train Acc: 0.9467 time spend on train method = 14.78s
+; Val. Acc: 0.8827 ; Best: 0.921132 time spend on validate method = 1.51s
+Epoch: 46 ; lr: 0.0038 ; Loss:  0.1338 ; Train Acc: 0.9569 time spend on train method = 15.16s
+; Val. Acc: 0.8595 ; Best: 0.921132 time spend on validate method = 1.52s
+Epoch: 47 ; lr: 0.0038 ; Loss:  0.1714 ; Train Acc: 0.9435 time spend on train method = 15.24s
+; Val. Acc: 0.8943 ; Best: 0.921132 time spend on validate method = 1.53s
+Epoch: 48 ; lr: 0.0038 ; Loss:  0.1312 ; Train Acc: 0.9584 time spend on train method = 15.02s
+; Val. Acc: 0.8989 ; Best: 0.921132 time spend on validate method = 1.50s
+Epoch: 49 ; lr: 0.0038 ; Loss:  0.1219 ; Train Acc: 0.9583 time spend on train method = 14.92s
+; Val. Acc: 0.8589 ; Best: 0.921132 time spend on validate method = 1.51s
+Epoch: 50 ; lr: 0.0038 ; Loss:  0.1255 ; Train Acc: 0.9565 time spend on train method = 14.77s
+; Val. Acc: 0.8943 ; Best: 0.921132 time spend on validate method = 1.47s
+Epoch: 51 ; lr: 0.0038 ; Loss:  0.1414 ; Train Acc: 0.9541 time spend on train method = 14.87s
+; Val. Acc: 0.8316 ; Best: 0.921132 time spend on validate method = 1.50s
+Epoch: 52 ; lr: 0.0038 ; Loss:  0.1412 ; Train Acc: 0.9549 time spend on train method = 14.37s
+; Val. Acc: 0.9216 ; Best: 0.921638 time spend on validate method = 1.50s
+Epoch: 53 ; lr: 0.0038 ; Loss:  0.1178 ; Train Acc: 0.9615 time spend on train method = 14.53s
+; Val. Acc: 0.9090 ; Best: 0.921638 time spend on validate method = 1.55s
+Epoch: 54 ; lr: 0.0038 ; Loss:  0.1006 ; Train Acc: 0.9663 time spend on train method = 14.58s
+; Val. Acc: 0.8959 ; Best: 0.921638 time spend on validate method = 1.49s
+Epoch: 55 ; lr: 0.0038 ; Loss:  0.1136 ; Train Acc: 0.9616 time spend on train method = 14.67s
+; Val. Acc: 0.8918 ; Best: 0.921638 time spend on validate method = 1.48s
+Epoch: 56 ; lr: 0.0038 ; Loss:  0.1271 ; Train Acc: 0.9585 time spend on train method = 14.52s
+; Val. Acc: 0.8928 ; Best: 0.921638 time spend on validate method = 1.47s
+Epoch: 57 ; lr: 0.0038 ; Loss:  0.1031 ; Train Acc: 0.9661 time spend on train method = 14.30s
+; Val. Acc: 0.9065 ; Best: 0.921638 time spend on validate method = 1.47s
+Epoch: 58 ; lr: 0.0038 ; Loss:  0.1165 ; Train Acc: 0.9601 time spend on train method = 14.63s
+; Val. Acc: 0.8938 ; Best: 0.921638 time spend on validate method = 1.53s
+Epoch: 59 ; lr: 0.0038 ; Loss:  0.1033 ; Train Acc: 0.9658 time spend on train method = 14.76s
+; Val. Acc: 0.9110 ; Best: 0.921638 time spend on validate method = 1.47s
+Epoch: 60 ; lr: 0.0038 ; Loss:  0.0953 ; Train Acc: 0.9671 time spend on train method = 14.69s
+; Val. Acc: 0.8736 ; Best: 0.921638 time spend on validate method = 1.53s
+
+
+60E, gpu, lr_schedule(.0038, .076)
+----------------------------------
+Epoch: 1 ; lr: 0.0038 ; Loss:  2.8056 ; Train Acc: 0.3795 time spend on train method = 16.55s
+; Val. Acc: 0.2280 ; Best: 0.228008 time spend on validate method = 1.47s
+Epoch: 2 ; lr: 0.0038 ; Loss:  1.2918 ; Train Acc: 0.5790 time spend on train method = 14.40s
+; Val. Acc: 0.3023 ; Best: 0.302326 time spend on validate method = 1.71s
+Epoch: 3 ; lr: 0.0038 ; Loss:  0.9122 ; Train Acc: 0.7055 time spend on train method = 14.19s
+; Val. Acc: 0.5647 ; Best: 0.564712 time spend on validate method = 1.47s
+Epoch: 4 ; lr: 0.0038 ; Loss:  0.7396 ; Train Acc: 0.7657 time spend on train method = 14.38s
+; Val. Acc: 0.6279 ; Best: 0.627907 time spend on validate method = 1.56s
+Epoch: 5 ; lr: 0.0038 ; Loss:  0.6374 ; Train Acc: 0.7998 time spend on train method = 14.52s
+; Val. Acc: 0.6572 ; Best: 0.657230 time spend on validate method = 1.54s
+Epoch: 6 ; lr: 0.0038 ; Loss:  0.5213 ; Train Acc: 0.8349 time spend on train method = 14.91s
+; Val. Acc: 0.8165 ; Best: 0.816481 time spend on validate method = 1.57s
+Epoch: 7 ; lr: 0.0038 ; Loss:  0.5621 ; Train Acc: 0.8256 time spend on train method = 14.93s
+; Val. Acc: 0.5950 ; Best: 0.816481 time spend on validate method = 1.52s
+Epoch: 8 ; lr: 0.0038 ; Loss:  0.4467 ; Train Acc: 0.8643 time spend on train method = 14.68s
+; Val. Acc: 0.8478 ; Best: 0.847826 time spend on validate method = 1.52s
+Epoch: 9 ; lr: 0.0038 ; Loss:  0.3989 ; Train Acc: 0.8746 time spend on train method = 14.16s
+; Val. Acc: 0.7548 ; Best: 0.847826 time spend on validate method = 1.50s
+Epoch: 10 ; lr: 0.0038 ; Loss:  0.3682 ; Train Acc: 0.8868 time spend on train method = 14.48s
+; Val. Acc: 0.7588 ; Best: 0.847826 time spend on validate method = 1.50s
+Epoch: 11 ; lr: 0.0038 ; Loss:  0.3685 ; Train Acc: 0.8869 time spend on train method = 14.37s
+; Val. Acc: 0.8160 ; Best: 0.847826 time spend on validate method = 1.47s
+Epoch: 12 ; lr: 0.0038 ; Loss:  0.3487 ; Train Acc: 0.8913 time spend on train method = 14.39s
+; Val. Acc: 0.4419 ; Best: 0.847826 time spend on validate method = 1.50s
+Epoch: 13 ; lr: 0.0038 ; Loss:  0.3579 ; Train Acc: 0.8888 time spend on train method = 14.73s
+; Val. Acc: 0.7235 ; Best: 0.847826 time spend on validate method = 1.49s
+Epoch: 14 ; lr: 0.0038 ; Loss:  0.3094 ; Train Acc: 0.9005 time spend on train method = 14.68s
+; Val. Acc: 0.8129 ; Best: 0.847826 time spend on validate method = 1.49s
+Epoch: 15 ; lr: 0.0038 ; Loss:  0.3019 ; Train Acc: 0.9039 time spend on train method = 14.45s
+; Val. Acc: 0.7872 ; Best: 0.847826 time spend on validate method = 1.47s
+Epoch: 16 ; lr: 0.0038 ; Loss:  0.2944 ; Train Acc: 0.9061 time spend on train method = 14.50s
+; Val. Acc: 0.8630 ; Best: 0.862993 time spend on validate method = 1.50s
+Epoch: 17 ; lr: 0.0038 ; Loss:  0.2740 ; Train Acc: 0.9127 time spend on train method = 14.51s
+; Val. Acc: 0.8665 ; Best: 0.866532 time spend on validate method = 1.51s
+Epoch: 18 ; lr: 0.0038 ; Loss:  0.2614 ; Train Acc: 0.9179 time spend on train method = 14.55s
+; Val. Acc: 0.8443 ; Best: 0.866532 time spend on validate method = 1.53s
+Epoch: 19 ; lr: 0.0038 ; Loss:  0.2466 ; Train Acc: 0.9189 time spend on train method = 14.37s
+; Val. Acc: 0.8655 ; Best: 0.866532 time spend on validate method = 1.48s
+Epoch: 20 ; lr: 0.0038 ; Loss:  0.2481 ; Train Acc: 0.9192 time spend on train method = 14.45s
+; Val. Acc: 0.7164 ; Best: 0.866532 time spend on validate method = 1.48s
+Epoch: 21 ; lr: 0.0038 ; Loss:  0.2682 ; Train Acc: 0.9134 time spend on train method = 14.62s
+; Val. Acc: 0.8802 ; Best: 0.880182 time spend on validate method = 1.50s
+Epoch: 22 ; lr: 0.0038 ; Loss:  0.2401 ; Train Acc: 0.9239 time spend on train method = 14.58s
+; Val. Acc: 0.8711 ; Best: 0.880182 time spend on validate method = 1.47s
+Epoch: 23 ; lr: 0.0038 ; Loss:  0.2445 ; Train Acc: 0.9212 time spend on train method = 14.49s
+; Val. Acc: 0.9024 ; Best: 0.902427 time spend on validate method = 1.51s
+Epoch: 24 ; lr: 0.0038 ; Loss:  0.2441 ; Train Acc: 0.9244 time spend on train method = 14.63s
+; Val. Acc: 0.8291 ; Best: 0.902427 time spend on validate method = 1.47s
+Epoch: 25 ; lr: 0.0038 ; Loss:  0.2226 ; Train Acc: 0.9296 time spend on train method = 14.23s
+; Val. Acc: 0.8953 ; Best: 0.902427 time spend on validate method = 1.51s
+Epoch: 26 ; lr: 0.0038 ; Loss:  0.2127 ; Train Acc: 0.9309 time spend on train method = 14.25s
+; Val. Acc: 0.8140 ; Best: 0.902427 time spend on validate method = 1.46s
+Epoch: 27 ; lr: 0.0038 ; Loss:  0.2162 ; Train Acc: 0.9289 time spend on train method = 14.27s
+; Val. Acc: 0.8342 ; Best: 0.902427 time spend on validate method = 1.48s
+Epoch: 28 ; lr: 0.0038 ; Loss:  0.2323 ; Train Acc: 0.9252 time spend on train method = 14.61s
+; Val. Acc: 0.8402 ; Best: 0.902427 time spend on validate method = 1.47s
+Epoch: 29 ; lr: 0.0038 ; Loss:  0.2124 ; Train Acc: 0.9306 time spend on train method = 14.08s
+; Val. Acc: 0.8372 ; Best: 0.902427 time spend on validate method = 1.45s
+Epoch: 30 ; lr: 0.0038 ; Loss:  0.1956 ; Train Acc: 0.9363 time spend on train method = 14.14s
+; Val. Acc: 0.8862 ; Best: 0.902427 time spend on validate method = 1.44s
+Epoch: 31 ; lr: 0.0038 ; Loss:  0.1882 ; Train Acc: 0.9390 time spend on train method = 14.09s
+; Val. Acc: 0.8761 ; Best: 0.902427 time spend on validate method = 1.45s
+Epoch: 32 ; lr: 0.0038 ; Loss:  0.2327 ; Train Acc: 0.9247 time spend on train method = 14.05s
+; Val. Acc: 0.8620 ; Best: 0.902427 time spend on validate method = 1.45s
+Epoch: 33 ; lr: 0.0038 ; Loss:  0.1917 ; Train Acc: 0.9344 time spend on train method = 14.15s
+; Val. Acc: 0.8539 ; Best: 0.902427 time spend on validate method = 1.45s
+Epoch: 34 ; lr: 0.0038 ; Loss:  0.1761 ; Train Acc: 0.9419 time spend on train method = 14.10s
+; Val. Acc: 0.8433 ; Best: 0.902427 time spend on validate method = 1.45s
+Epoch: 35 ; lr: 0.0038 ; Loss:  0.1980 ; Train Acc: 0.9361 time spend on train method = 13.99s
+; Val. Acc: 0.6593 ; Best: 0.902427 time spend on validate method = 1.44s
+Epoch: 36 ; lr: 0.0038 ; Loss:  0.1945 ; Train Acc: 0.9381 time spend on train method = 14.08s
+; Val. Acc: 0.8716 ; Best: 0.902427 time spend on validate method = 1.44s
+Epoch: 37 ; lr: 0.0038 ; Loss:  0.1608 ; Train Acc: 0.9468 time spend on train method = 13.99s
+; Val. Acc: 0.8792 ; Best: 0.902427 time spend on validate method = 1.44s
+Epoch: 38 ; lr: 0.0038 ; Loss:  0.2087 ; Train Acc: 0.9328 time spend on train method = 13.90s
+; Val. Acc: 0.8488 ; Best: 0.902427 time spend on validate method = 1.44s
+Epoch: 39 ; lr: 0.0038 ; Loss:  0.1792 ; Train Acc: 0.9403 time spend on train method = 14.19s
+; Val. Acc: 0.8999 ; Best: 0.902427 time spend on validate method = 1.50s
+Epoch: 40 ; lr: 0.0038 ; Loss:  0.1499 ; Train Acc: 0.9486 time spend on train method = 14.07s
+; Val. Acc: 0.9090 ; Best: 0.908999 time spend on validate method = 1.48s
+Epoch: 41 ; lr: 0.0038 ; Loss:  0.1289 ; Train Acc: 0.9556 time spend on train method = 14.18s
+; Val. Acc: 0.9029 ; Best: 0.908999 time spend on validate method = 1.49s
+Epoch: 42 ; lr: 0.0038 ; Loss:  0.1560 ; Train Acc: 0.9478 time spend on train method = 14.07s
+; Val. Acc: 0.8600 ; Best: 0.908999 time spend on validate method = 1.49s
+Epoch: 43 ; lr: 0.0038 ; Loss:  0.1836 ; Train Acc: 0.9392 time spend on train method = 13.90s
+; Val. Acc: 0.8953 ; Best: 0.908999 time spend on validate method = 1.47s
+Epoch: 44 ; lr: 0.0038 ; Loss:  0.1640 ; Train Acc: 0.9431 time spend on train method = 14.01s
+; Val. Acc: 0.7012 ; Best: 0.908999 time spend on validate method = 1.44s
+Epoch: 45 ; lr: 0.0038 ; Loss:  0.1367 ; Train Acc: 0.9548 time spend on train method = 13.76s
+; Val. Acc: 0.8953 ; Best: 0.908999 time spend on validate method = 1.45s
+Epoch: 46 ; lr: 0.0038 ; Loss:  0.1483 ; Train Acc: 0.9504 time spend on train method = 12.07s
+; Val. Acc: 0.8822 ; Best: 0.908999 time spend on validate method = 1.42s
+Epoch: 47 ; lr: 0.0038 ; Loss:  0.1357 ; Train Acc: 0.9521 time spend on train method = 11.98s
+; Val. Acc: 0.9226 ; Best: 0.922649 time spend on validate method = 1.46s
+Epoch: 48 ; lr: 0.0038 ; Loss:  0.1495 ; Train Acc: 0.9488 time spend on train method = 11.85s
+; Val. Acc: 0.8999 ; Best: 0.922649 time spend on validate method = 1.41s
+Epoch: 49 ; lr: 0.0038 ; Loss:  0.1382 ; Train Acc: 0.9533 time spend on train method = 11.82s
+; Val. Acc: 0.8787 ; Best: 0.922649 time spend on validate method = 1.42s
+Epoch: 50 ; lr: 0.0038 ; Loss:  0.1172 ; Train Acc: 0.9590 time spend on train method = 11.95s
+; Val. Acc: 0.8933 ; Best: 0.922649 time spend on validate method = 1.43s
+Epoch: 51 ; lr: 0.0038 ; Loss:  0.1092 ; Train Acc: 0.9624 time spend on train method = 12.13s
+; Val. Acc: 0.9070 ; Best: 0.922649 time spend on validate method = 1.46s
+Epoch: 52 ; lr: 0.0038 ; Loss:  0.1195 ; Train Acc: 0.9587 time spend on train method = 12.16s
+; Val. Acc: 0.8761 ; Best: 0.922649 time spend on validate method = 1.47s
+Epoch: 53 ; lr: 0.0038 ; Loss:  0.1248 ; Train Acc: 0.9574 time spend on train method = 11.93s
+; Val. Acc: 0.8913 ; Best: 0.922649 time spend on validate method = 1.41s
+Epoch: 54 ; lr: 0.0038 ; Loss:  0.1436 ; Train Acc: 0.9527 time spend on train method = 11.85s
+; Val. Acc: 0.4788 ; Best: 0.922649 time spend on validate method = 1.44s
+Epoch: 55 ; lr: 0.0038 ; Loss:  0.2411 ; Train Acc: 0.9269 time spend on train method = 12.01s
+; Val. Acc: 0.9141 ; Best: 0.922649 time spend on validate method = 1.45s
+Epoch: 56 ; lr: 0.0038 ; Loss:  0.1210 ; Train Acc: 0.9586 time spend on train method = 14.26s
+; Val. Acc: 0.9196 ; Best: 0.922649 time spend on validate method = 1.45s
+Epoch: 57 ; lr: 0.0038 ; Loss:  0.0847 ; Train Acc: 0.9693 time spend on train method = 14.23s
+; Val. Acc: 0.9211 ; Best: 0.922649 time spend on validate method = 1.45s
+Epoch: 58 ; lr: 0.0038 ; Loss:  0.0946 ; Train Acc: 0.9664 time spend on train method = 14.31s
+; Val. Acc: 0.8094 ; Best: 0.922649 time spend on validate method = 1.50s
+Epoch: 59 ; lr: 0.0038 ; Loss:  0.1218 ; Train Acc: 0.9585 time spend on train method = 14.01s
+; Val. Acc: 0.9252 ; Best: 0.925177 time spend on validate method = 1.46s
+Epoch: 60 ; lr: 0.0038 ; Loss:  0.1028 ; Train Acc: 0.9660 time spend on train method = 11.95s
+; Val. Acc: 0.9085 ; Best: 0.925177 time spend on validate method = 1.42s
+
+
