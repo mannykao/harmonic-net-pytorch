@@ -2,3 +2,6 @@ numpy
 matplotlib
 scipy
 torch
+./mkpypl/mkpyutils-1.5-py3-none-any.whl
+./mkpypl/datasets-1.6-py3-none-any.whl
+./mkpypl/mk_mlutils-1.4-py3-none-any.whl
