@@ -32,59 +32,23 @@ from datasets.rotmnist import rotmnist
 from mnistmodel import DeepMNIST # for rotation equivariant CNN
 from mnistmodel import RegularCNN # for regular CNN
 
-class RotMNISTDataset(Dataset):
-	'''Rot-MNIST Dataset'''
 
-	def __init__(self, image_set, label_set):
-		'''
-		Args:
-			image_set (numpy int): matrix containing images of 
-			rot-MIST digits
-			label_set (numpy int): matrix containing labels for
-			the digits
-		'''
-		self.image_set = torch.from_numpy(image_set)
-		self.label_set = torch.from_numpy(np.asarray(label_set, dtype=np.int64))
+class RotMNISTDataset(rotmnist.RotMNIST):
+	def __init__(self,
+		name="RotMNIST", 
+		split:str="train",
+		device="cuda",
+	):
+		super().__init__(name, split=split)
 
-	def __len__(self):
-		'''
-		Returns length of image_set
-		'''
-		return len(self.image_set)
+		self.images = torch.from_numpy(self.images).to(device)
+		self.labels = torch.from_numpy(np.asarray(self.labels, dtype=np.int64)).to(device)
+		#labels = labels.type(torchutils.LongTensor)
 
 	def __getitem__(self, idx):
-		'''
-		Behavior: Takes a random index from the instance of Dataloader and returns
-		the respective sample from the data
-
-		Args:
-			idx (int): denotes index of sample to be returned
-
-		Returns:
-			image_sample (torch tensor): 1D matrix containing the image sample
-			label_sample (torch tensor): label of the respective sample
-		'''
-
-		image_sample = self.image_set[idx]
-		label_sample = self.label_set[idx]
+		image_sample = self.images[idx]
+		label_sample = self.labels[idx]
 		return image_sample, label_sample
-
-if False:
-	class RotMNISTDataset(rotmnist.RotMNIST):
-		def __init__(self,
-			name="RotMNIST", 
-			split:str="train",
-			seed=0,
-		):
-			super().__init__(name, split=split)
-
-			self.image_set = torch.from_numpy(self.images)
-			self.label_set = torch.from_numpy(np.asarray(self.labels, dtype=np.int64))
-
-		def __getitem__(self, idx):
-			image_sample = self.image_set[idx]
-			label_sample = self.label_set[idx]
-			return image_sample, label_sample
 
 
 def download2FileAndExtract(url, folder, fileName):
@@ -201,16 +165,16 @@ def main(args):
 	##### SETUP AND LOAD DATA #####
 	args, data = settings(args)
 
-	torchutils.onceInit(kCUDA=True, seed=1)
-
 	# choosing the device to run the model
-	device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+	device = torchutils.onceInit(kCUDA=torch.cuda.is_available(), seed=1)
+	#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 	print(device)
+
 	# creating train_loader and valid_loader
 	#train_dataset = RotMNISTDataset(data['train_x'], data['train_y'])
 	#valid_dataset = RotMNISTDataset(data['valid_x'], data['valid_y'])
-	train_dataset = rotmnist.RotMNIST(split='train')
-	valid_dataset = rotmnist.RotMNIST(split='valid')
+	train_dataset = RotMNISTDataset(split='train', device=device)
+	valid_dataset = RotMNISTDataset(split='valid', device=device)
 	print(len(train_dataset), len(valid_dataset))
 
 	trainloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, drop_last=True)
@@ -266,9 +230,8 @@ def main(args):
 				labels = batch[1]
 
 				# Transfer to GPU
-				images, labels = images.to(device), labels.to(device)
-				labels = labels.type(torch.cuda.LongTensor if torch.cuda.is_available() \
-																			else torch.LongTensor)
+				#images, labels = images.to(device), labels.to(device)
+				#labels = labels.type(torchutils.LongTensor)
 
 				optimizer.zero_grad()
 				logits = model(images)
@@ -282,8 +245,8 @@ def main(args):
 				optimizer.step()
 
 			current_lr = lr_scheduler.get_last_lr()[0]
-			if (epoch > 0) and (epoch % 100 == 0):
-				lr_scheduler.step()
+			if (epoch > 0) and (epoch % 100 == 0):		
+				lr_scheduler.step()		#scheduler.step() should be after optimizer.step()
 
 			epoch_acc = correct / (len(trainloader)*args.batch_size)
 			epoch_loss /= len(train_dataset)
@@ -302,9 +265,8 @@ def main(args):
 				labels = batch[1]
 
 				# Transfer to GPU
-				images, labels = images.to(device), labels.to(device)
-				labels = labels.type(torch.cuda.LongTensor if torch.cuda.is_available() \
-																			else torch.LongTensor)
+				#images, labels = images.to(device), labels.to(device)
+				#labels = labels.type(torchutils.LongTensor)
 
 				logits = model(images)
 				correct += (torch.argmax(logits, dim=1).type(labels.dtype)==labels).sum().item()
