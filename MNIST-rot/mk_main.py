@@ -236,9 +236,11 @@ def main(args):
 
 	#lr scheduler
 	#lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.1)
-	lr_scheduler = torch.optim.lr_scheduler.CyclicLR(optimizer, base_lr=1e-6, max_lr=lr, step_size_up=20, mode='triangular2', cycle_momentum=False)
-	
-	
+	lr_scheduler = torch.optim.lr_scheduler.CyclicLR(
+		optimizer, base_lr=0.0038, max_lr=lr, step_size_up=20, 
+		mode='triangular2', cycle_momentum=False
+	)
+		
 	lossfn = torch.nn.CrossEntropyLoss() # defining the loss function
 	print('No. of batches : ', len(trainloader))
 	print(f'Starting the training......{args.n_epochs}')
@@ -254,8 +256,6 @@ def main(args):
 		if args.train_mode:
 			# Training phase
 			model.train()
-			if epoch % 100 == 0:
-				lr_scheduler.step()
 
 			epoch_loss = 0
 			epoch_acc = 0
@@ -281,10 +281,14 @@ def main(args):
 
 				optimizer.step()
 
+			current_lr = lr_scheduler.get_last_lr()[0]
+			if (epoch > 0) and (epoch % 100 == 0):
+				lr_scheduler.step()
+
 			epoch_acc = correct / (len(trainloader)*args.batch_size)
 			epoch_loss /= len(train_dataset)
-			current_lr = lr_scheduler.get_lr()[0]
-#         print('Epoch: ', epoch+1, '; lr: ', current_lr, '; Loss: ', epoch_loss, '; Train Acc: ', epoch_acc, end = " ")
+#			current_lr = lr_scheduler.get_lr()[0]
+#			print('Epoch: ', epoch+1, '; lr: ', current_lr, '; Loss: ', epoch_loss, '; Train Acc: ', epoch_acc, end = " ")
 			print(f"Epoch: {epoch+1} ; lr: {current_lr:.4f} ; Loss:  {epoch_loss:.4f} ; Train Acc: {epoch_acc:.4f}", end = " ")
 			tic1 = time_spent(tic1, 'train')
 
