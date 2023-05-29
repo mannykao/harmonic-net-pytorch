@@ -25,8 +25,10 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 
 from mkpyutils.testutil import time_spent
+
+from mk_mlutils.dataset import dataset_base
 from mk_mlutils.utils import torchutils
-#from mldatasets.mnist.rotmnist import RotMNIST
+from mk_mlutils.pipeline.batch import Bagging
 from datasets.rotmnist import rotmnist
 
 from mnistmodel import DeepMNIST # for rotation equivariant CNN
@@ -48,7 +50,7 @@ class RotMNISTDataset(rotmnist.RotMNIST):
 	def __getitem__(self, idx):
 		image_sample = self.images[idx]
 		label_sample = self.labels[idx]
-		return image_sample, label_sample
+		return dataset_base.ImageDesc(image_sample, label_sample)
 
 
 def download2FileAndExtract(url, folder, fileName):
@@ -173,13 +175,19 @@ def main(args):
 	# creating train_loader and valid_loader
 	#train_dataset = RotMNISTDataset(data['train_x'], data['train_y'])
 	#valid_dataset = RotMNISTDataset(data['valid_x'], data['valid_y'])
-	train_dataset = RotMNISTDataset(split='train', device=device)
+	
+	train_dataset = rotmnist.RotMNIST(split='train')
+	#train_dataset = RotMNISTDataset(split='train', device=device)
 	valid_dataset = RotMNISTDataset(split='valid', device=device)
 	print(len(train_dataset), len(valid_dataset))
 
-	trainloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, drop_last=True)
-	validloader = DataLoader(valid_dataset, batch_size=args.batch_size, drop_last=True)
+	bsize = args.batch_size
+	trainloader = DataLoader(train_dataset, batch_size=bsize, shuffle=True, drop_last=True)
+	validloader = DataLoader(valid_dataset, batch_size=bsize, drop_last=True)
 
+	print(f"{args.bagging=}")
+	if args.bagging:
+		trainloader = Bagging(train_dataset, batchsize=bsize, shuffle=False, drop_last=True)
 
 	# gathering parameters for training
 	lr = args.learning_rate
@@ -229,9 +237,14 @@ def main(args):
 				images = batch[0]
 				labels = batch[1]
 
+				#print(f"[{idx}]: {images.shape}")
+
 				# Transfer to GPU
-				#images, labels = images.to(device), labels.to(device)
-				#labels = labels.type(torchutils.LongTensor)
+				if args.bagging:
+					images = torch.from_numpy(images)
+					labels = torch.from_numpy(np.asarray(labels, dtype=np.int64))
+				images, labels = images.to(device), labels.to(device)
+				labels = labels.type(torchutils.LongTensor)
 
 				optimizer.zero_grad()
 				logits = model(images)
@@ -265,8 +278,8 @@ def main(args):
 				labels = batch[1]
 
 				# Transfer to GPU
-				#images, labels = images.to(device), labels.to(device)
-				#labels = labels.type(torchutils.LongTensor)
+				images, labels = images.to(device), labels.to(device)
+				labels = labels.type(torchutils.LongTensor)
 
 				logits = model(images)
 				correct += (torch.argmax(logits, dim=1).type(labels.dtype)==labels).sum().item()
@@ -285,4 +298,5 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--data_dir", help="data directory", default='./data')
 	parser.add_argument("--n_epochs", type=int, default=20)
+	parser.add_argument('--bagging', action = 'store_true', default = False, help = 'Bagging or DataLoader for minibatch.')
 	main(parser.parse_args())
