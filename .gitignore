@@ -129,6 +129,7 @@ dmypy.json
 .pyre/
 
 MNIST-rot/models
+mldatasets/datasets/fashionmnist/FashionMNIST
 mldatasets/datasets/mnist/MNIST
 mldatasets/datasets/rotmnist/rotMNIST
 mldatasets/datasets/bsd500/bsd500

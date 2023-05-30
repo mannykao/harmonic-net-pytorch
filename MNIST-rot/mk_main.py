@@ -187,7 +187,9 @@ def main(args):
 
 	print(f"{args.bagging=}")
 	if args.bagging:
-		trainloader = Bagging(train_dataset, batchsize=bsize, shuffle=False, drop_last=True)
+		trainloader = Bagging(train_dataset, 
+			batchsize=bsize, shuffle=False, drop_last=True
+		)
 
 	# gathering parameters for training
 	lr = args.learning_rate
