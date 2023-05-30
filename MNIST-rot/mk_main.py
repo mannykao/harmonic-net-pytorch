@@ -190,6 +190,16 @@ def create_dir(dir_name):
 		print('Created {:s}'.format(dir_name))
 	return dir_name
 
+def get_device_base():
+	"""
+	Desc:
+		returns the device name and integer datatype.
+	"""
+	device, intType = torch.device("cpu"), torch.LongTensor
+	if torch.cuda.is_available():
+		return torch.device("cuda"), torch.long
+	return device, intType
+
 def main(args):
 	'''
 	Performs all steps from data loading, model initialization to 
@@ -204,7 +214,7 @@ def main(args):
 	torchutils.onceInit(kCUDA=True, seed=1)
 
 	# choosing the device to run the model
-	device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+	device, label_dtype = get_device_base()#torch.device("cuda" if torch.cuda.is_available() else "cpu")
 	print(device)
 	# creating train_loader and valid_loader
 	#train_dataset = RotMNISTDataset(data['train_x'], data['train_y'])
@@ -266,9 +276,7 @@ def main(args):
 				labels = batch[1]
 
 				# Transfer to GPU
-				images, labels = images.to(device), labels.to(device)
-				labels = labels.type(torch.cuda.LongTensor if torch.cuda.is_available() \
-																			else torch.LongTensor)
+				images, labels = images.to(device), labels.to(device, label_dtype)
 
 				optimizer.zero_grad()
 				logits = model(images)
@@ -298,10 +306,7 @@ def main(args):
 				labels = batch[1]
 
 				# Transfer to GPU
-				images, labels = images.to(device), labels.to(device)
-				labels = labels.type(torch.cuda.LongTensor if torch.cuda.is_available() \
-																			else torch.LongTensor)
-
+				images, labels = images.to(device), labels.to(device, label_dtype)
 				logits = model(images)
 				correct += (torch.argmax(logits, dim=1).type(labels.dtype)==labels).sum().item()
 			val_acc = correct / (len(validloader)*args.batch_size)
