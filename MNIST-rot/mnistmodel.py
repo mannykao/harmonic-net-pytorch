@@ -73,7 +73,7 @@ class DeepMNIST(nn.Module):
         x = x.view(self.bs, self.args.dim, self.args.dim, 1, 1, 1)
         # defining block 1
         cv1 = self.conv2d_1_nf(x)
-        cv1_bcc = cv1.detach().clone()
+        #cv1_bcc = cv1.detach().clone() #EDIT: cv1_bcc is expensive and unused.
         cv1 = self.nonlin1(cv1)
 
         cv2 = self.conv2d_nf_nf(cv1)
