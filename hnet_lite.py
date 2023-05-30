@@ -18,6 +18,7 @@ from torch import nn
 
 from hnet_ops import *
 from hnet_ops import h_conv
+import pickle
 
 class Conv2d(nn.Module):
     '''Defining custom convolutional layer'''
@@ -147,8 +148,15 @@ class Conv2d(nn.Module):
         Returns:
             R (torch tensor): output feature tensor obtained from harmonic convolution 
         '''
-        
+
         W = get_filter_weights(self.Q, fs=self.kernel_size, P=self.P, n_rings=self.n_rings)
+        #NOTE: This snippet was used to get input and output of the `get_filter_weights()` function.
+        # input_dict = {"R_dict": self.Q, "fs": self.kernel_size, "P": self.P, "n_rings": self.n_rings}
+        # output = W
+        # func_tuple = (input_dict, output)
+        # with open("logs/get_filter_weights.iodict", "wb") as iofile:
+        #     pickle.dump(func_tuple, iofile)
+        # exit()
         R = h_conv(X, W, strides=self.stride, padding=self.padding, max_order=self.max_order)
         return R
 
