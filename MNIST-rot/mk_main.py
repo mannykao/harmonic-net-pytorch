@@ -120,7 +120,6 @@ def settings(args):
 	# Other options
 #   args.n_epochs = 50      #2000
 	args.batch_size = 46
-	args.learning_rate = 0.076
 	args.std_mult = 0.7
 	args.delay = 12
 	args.phase_preconditioner = 7.8
@@ -185,7 +184,6 @@ def main(args):
 	trainloader = DataLoader(train_dataset, batch_size=bsize, shuffle=True, drop_last=True)
 	validloader = DataLoader(valid_dataset, batch_size=bsize, drop_last=True)
 
-	print(f"{args.bagging=}")
 	if args.bagging:
 		trainloader = Bagging(train_dataset, 
 			batchsize=bsize, shuffle=False, drop_last=True
@@ -193,6 +191,8 @@ def main(args):
 
 	# gathering parameters for training
 	lr = args.learning_rate
+	max_lr = 0.076		#for CyclicLR
+	print(f"Bagging {args.bagging}, {lr=}")
 
 	model = DeepMNIST(args).to(device)
 	#model = RegularCNN(args).to(device)
@@ -211,7 +211,7 @@ def main(args):
 	#lr scheduler
 	#lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.1)
 	lr_scheduler = torch.optim.lr_scheduler.CyclicLR(
-		optimizer, base_lr=0.0038, max_lr=lr, step_size_up=20, 
+		optimizer, base_lr=lr, max_lr=max_lr, step_size_up=20, 
 		mode='triangular2', cycle_momentum=False
 	)
 		
@@ -299,6 +299,7 @@ def main(args):
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--data_dir", help="data directory", default='./data')
+	parser.add_argument("--learning_rate", type=float, default= 0.001, help ='initially learning rate')		 	#0.076 - mck this is now the starting lr
 	parser.add_argument("--n_epochs", type=int, default=20)
 	parser.add_argument('--bagging', action = 'store_true', default = False, help = 'Bagging or DataLoader for minibatch.')
 	main(parser.parse_args())
