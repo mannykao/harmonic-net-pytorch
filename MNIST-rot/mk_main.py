@@ -121,7 +121,6 @@ def settings(args):
 	
 	# Other options
 #   args.n_epochs = 50      #2000
-	args.batch_size = 46
 	args.std_mult = 0.7
 	args.delay = 12
 	args.phase_preconditioner = 7.8
@@ -136,7 +135,6 @@ def settings(args):
 	args.n_channels = 1
 	args.n_classes = 10
 	args.lr_div = 10.
-	args.model_path = './models/'
 	args.train_mode = True
 	args.load_pretrained = False
 	args.pretrained_model = './models/rotmnist_model.pth'
@@ -202,6 +200,18 @@ def main(args):
 	if args.load_pretrained:
 		model.load_state_dict(torch.load(args.pretrained_model))
 
+	params = trainingapp.TrainingParams(
+		device,
+		model,
+		trainloader,
+		validloader,
+		validloader,
+		batchsize = args.batch_size, 			#46
+		validate_batchsize = args.batch_size,	#bsize for validate and test runs
+		lr = 0.001,
+		val_best = 0.0,
+	)
+
 	# print model parameters count
 	pytorch_n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
 	print('Total trainable params : ', pytorch_n_params)
@@ -220,8 +230,6 @@ def main(args):
 	lossfn = torch.nn.CrossEntropyLoss() # defining the loss function
 	print('No. of batches : ', len(trainloader))
 	print(f'Starting the training......{args.n_epochs}')
-
-	val_best = 0.0
 
 	if not args.train_mode:
 		args.n_epochs = 1
@@ -273,33 +281,22 @@ def main(args):
 			tic1 = time_spent(tic1, 'train')
 
 		# Validation phase
-		model.eval()
-		with torch.no_grad():
-			val_acc = 0.0
-			correct = 0
-			for idx, batch in enumerate(validloader):
-				images = batch[0]
-				labels = batch[1]
-
-				# Transfer to GPU
-				images, labels = images.to(device), labels.to(device)
-				labels = labels.type(torchutils.LongTensor)
-
-				logits = model(images)
-				correct += (torch.argmax(logits, dim=1).type(labels.dtype)==labels).sum().item()
-			val_acc = correct / (len(validloader)*args.batch_size)
-			if val_acc > val_best:
-				val_best = val_acc
-				# save the cuurrent model
-				save_path = args.model_path + '/model_' + str(epoch) + '.pth'
-				torch.save(model.state_dict(), save_path)
-
-			print(f"; Val. Acc: {val_acc:.4f} ; Best: {val_best:4f} ", end="")
-			time_spent(tic1, 'validate')
+		val_best, _ = trainingapp.validate(
+			params,
+			model, 
+			validloader,
+			args.model_path,
+			device,
+			epoch,
+			split='validate',
+		)
 
 
 if __name__ == '__main__':
 	#1. get shared args
 	parser = trainingapp.shared_args(description='H-net for RotMNIST')
-	parser.add_argument("--data_dir", help="data directory", default='./data')
+	parser.add_argument("--data_dir", default='./data', help="data directory")
+	parser.add_argument("--batch_size", type=int, default=46, help="batch size")
+	parser.add_argument("--model_path", type=str, default='./models/', help="snapshot path")
+
 	main(parser.parse_args())
