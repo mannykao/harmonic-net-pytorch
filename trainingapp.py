@@ -32,6 +32,7 @@ class TrainingParams():
 		batchsize: int = 46,
 		validate_batchsize: int = 46,	#bsize for validate and test runs
 		lr: float = 0.001,
+		max_lr: float = 0.076,
 		lr_schedule: bool = False,
 		snapshot=None,
 		datasetname: Optional[str] = "RotMNIST",
@@ -74,7 +75,9 @@ class TrainingParams():
 
 	def setup(self):
 		""" Callable for derived class to setup our training params using code """
-		pass	
+		self.train_set 	= self.params['train'].dataset
+		self.test_set	= self.params['test'].dataset
+		self.val_set 	= self.params['validate'].dataset
 
 	@property
 	def params(self):
@@ -88,6 +91,82 @@ class TrainingParams():
 #end of TrainingParams
 
 
+def train(
+	params:TrainingParams,
+	model:nn.Module, 
+	trainloader,
+	model_path:str,
+	device,
+	epoch:int,
+	split:str='train'
+) -> Tuple[float, float]:
+
+	lr 		 = params['lr']
+	max_lr 	 = params['max_lr']
+	n_epochs = params['n_epochs']
+	batch_size = params['batchsize']
+	train_dataset = params.train_set
+	val_dataset   = params.val_set
+
+	bagging = isinstance(trainloader, Bagging)
+
+	# Optimizer
+	optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+	#optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9)
+
+	#lr scheduler
+	#lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.1)
+	lr_scheduler = torch.optim.lr_scheduler.CyclicLR(
+		optimizer, base_lr=lr, max_lr=max_lr, step_size_up=20, 
+		mode='triangular2', cycle_momentum=False
+	)
+	lossfn = torch.nn.CrossEntropyLoss() # defining the loss function
+
+	# Starting to train the model
+	for epoch in range(n_epochs):
+		tic1 = time.time()
+
+		if args.train_mode:
+			# Training phase
+			model.train()
+
+			epoch_loss = 0
+			epoch_acc = 0
+
+			correct = 0
+			for idx, batch in enumerate(trainloader):
+				images = batch[0]
+				labels = batch[1]
+
+				# Transfer to GPU
+				if bagging:
+					images = torch.from_numpy(images)
+					labels = torch.from_numpy(np.asarray(labels, dtype=np.int64))
+				images, labels = images.to(device), labels.to(device)
+				labels = labels.type(torchutils.LongTensor)
+
+				optimizer.zero_grad()
+				logits = model(images)
+				correct += (torch.argmax(logits, dim=1).type(labels.dtype)==labels).sum().item()
+
+				#loss = lossfn(logits, labels)
+				loss = F.nll_loss(F.log_softmax(logits, dim=1), labels, reduction='sum')
+				epoch_loss += loss.item()
+				loss.backward()
+
+				optimizer.step()
+
+			current_lr = lr_scheduler.get_last_lr()[0]
+			if (epoch > 0) and (epoch % 100 == 0):		
+				lr_scheduler.step()		#scheduler.step() should be after optimizer.step()
+
+			epoch_acc = correct / (len(trainloader)*batch_size)
+			epoch_loss /= len(train_dataset)
+#			current_lr = lr_scheduler.get_lr()[0]
+#			print('Epoch: ', epoch+1, '; lr: ', current_lr, '; Loss: ', epoch_loss, '; Train Acc: ', epoch_acc, end = " ")
+			print(f"Epoch: {epoch+1} ; lr: {current_lr:.4f} ; Loss:  {epoch_loss:.4f} ; Train Acc: {epoch_acc:.4f}", end = " ")
+			tic1 = time_spent(tic1, 'train')
+
 def validate(
 	params:TrainingParams,
 	model:nn.Module, 
@@ -100,8 +179,8 @@ def validate(
 
 	batch_size	= params['batchsize']
 	val_best	= params['val_best']
-	tic0 = time.time()
 
+	tic0 = time.time()
 	# Validation phase
 	model.eval()
 	with torch.no_grad():
@@ -138,3 +217,8 @@ def shared_args(description='H-net for RotMNIST', extras:List[Tuple] =[]) -> arg
 	parser.add_argument("--n_epochs", type=int, default=20)
 	parser.add_argument('--bagging', action = 'store_true', default=True, help='Bagging or DataLoader for minibatch.')
 	return parser
+
+
+if __name__ == '__main__':
+	from datasets.rotmnist import rotmnist
+	from mk_mlutils.pipeline.batch import Bagging

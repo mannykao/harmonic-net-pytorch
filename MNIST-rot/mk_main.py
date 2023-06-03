@@ -199,6 +199,8 @@ def main(args):
 
 	if args.load_pretrained:
 		model.load_state_dict(torch.load(args.pretrained_model))
+	if not args.train_mode:
+		args.n_epochs = 1
 
 	params = trainingapp.TrainingParams(
 		device,
@@ -208,13 +210,15 @@ def main(args):
 		validloader,
 		batchsize = args.batch_size, 			#46
 		validate_batchsize = args.batch_size,	#bsize for validate and test runs
-		lr = 0.001,
+		lr = lr, max_lr = max_lr,
 		val_best = 0.0,
 	)
 
 	# print model parameters count
 	pytorch_n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
 	print('Total trainable params : ', pytorch_n_params)
+	print('No. of batches : ', len(trainloader))
+	print(f'Starting the training......{args.n_epochs}')
 
 	# Optimizer
 	optimizer = torch.optim.Adam(model.parameters(), lr=lr)
@@ -226,13 +230,8 @@ def main(args):
 		optimizer, base_lr=lr, max_lr=max_lr, step_size_up=20, 
 		mode='triangular2', cycle_momentum=False
 	)
-		
 	lossfn = torch.nn.CrossEntropyLoss() # defining the loss function
-	print('No. of batches : ', len(trainloader))
-	print(f'Starting the training......{args.n_epochs}')
 
-	if not args.train_mode:
-		args.n_epochs = 1
 	# Starting to train the model
 	for epoch in range(args.n_epochs):
 		tic1 = time.time()
@@ -248,8 +247,6 @@ def main(args):
 			for idx, batch in enumerate(trainloader):
 				images = batch[0]
 				labels = batch[1]
-
-				#print(f"[{idx}]: {images.shape}")
 
 				# Transfer to GPU
 				if args.bagging:
@@ -298,5 +295,6 @@ if __name__ == '__main__':
 	parser.add_argument("--data_dir", default='./data', help="data directory")
 	parser.add_argument("--batch_size", type=int, default=46, help="batch size")
 	parser.add_argument("--model_path", type=str, default='./models/', help="snapshot path")
+	args = parser.parse_args()
 
-	main(parser.parse_args())
+	main(args)
