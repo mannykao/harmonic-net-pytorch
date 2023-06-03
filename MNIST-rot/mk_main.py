@@ -18,21 +18,23 @@ import sys
 import time
 from urllib.request import urlopen
 import zipfile
-sys.path.append('../')
+
 import numpy as np
 import torch
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 
 from mkpyutils.testutil import time_spent
-
 from mk_mlutils.dataset import dataset_base
 from mk_mlutils.utils import torchutils
 from mk_mlutils.pipeline.batch import Bagging
 from datasets.rotmnist import rotmnist
 
+#our shared modules is one level up
+sys.path.append('../')
 from mnistmodel import DeepMNIST # for rotation equivariant CNN
 from mnistmodel import RegularCNN # for regular CNN
+import trainingapp
 
 
 class RotMNISTDataset(rotmnist.RotMNIST):
@@ -297,9 +299,7 @@ def main(args):
 
 
 if __name__ == '__main__':
-	parser = argparse.ArgumentParser()
+	#1. get shared args
+	parser = trainingapp.shared_args(description='H-net for RotMNIST')
 	parser.add_argument("--data_dir", help="data directory", default='./data')
-	parser.add_argument("--learning_rate", type=float, default=0.001, help='initially learning rate')		 	#0.076 - mck this is now the starting lr
-	parser.add_argument("--n_epochs", type=int, default=20)
-	parser.add_argument('--bagging', action = 'store_true', default=True, help='Bagging or DataLoader for minibatch.')
 	main(parser.parse_args())
