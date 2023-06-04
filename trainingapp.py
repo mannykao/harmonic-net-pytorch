@@ -182,7 +182,7 @@ def train(
 			model, 
 			validloader,
 			device,
-			epoch=epoch,
+			epoch=epoch+1,
 			split='validate',
 		)
 		best_path =	params['best_path']
@@ -201,10 +201,10 @@ def validate(
 	batch_size	= params['batchsize']
 	val_best	= params['val_best']
 	model_path	= params['snapshot']
+	best_path	= params['best_path']
 
 	tic0 = time.time()
 	# Validation phase
-	save_path = None
 
 	model.eval()
 	with torch.no_grad():
@@ -225,11 +225,11 @@ def validate(
 			val_best = val_acc
 
 			# save the cuurrent model
-			save_path = model_path/f"model_{epoch}.pth"
-			torch.save(model.state_dict(), save_path)
+			best_path = model_path/f"model_{epoch}.pth"
+			torch.save(model.state_dict(), best_path)
 
 			params.params['val_best'] = val_best
-			params.params['best_path'] = save_path
+			params.params['best_path'] = best_path
 
 		print(f"; {split}. Acc: {val_acc:.4f} ; Best: {val_best:4f} ", end="")
 		tic1 = time_spent(tic0, split)	

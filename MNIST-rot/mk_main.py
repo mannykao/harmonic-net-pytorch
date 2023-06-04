@@ -233,6 +233,13 @@ def main(args):
 		split='train'
 	)
 	print(" ")
+	print(f"Best {val_best:.4f} {best_path=}")
+
+	#noext = Path(os.path.splitext(best_path)[0])
+	#torchutils.load_snapshot(device, model, str(noext))
+
+	snapshot = torch.load(best_path)
+	model.load_state_dict(snapshot)
 
 	# Test (50k) phase
 	trainingapp.validate(

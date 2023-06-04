@@ -4,7 +4,19 @@ test. Acc: 0.8318 ; Best: 0.831752 time spend on test method = 44.69s
 
 10E 10k 50k, bagging, lr=0.001
 ------------------------------
-test. Acc: 0.7929 ; Best: 0.812942 time spend on test method = 44.59s
+ 10E: test. Acc: 0.7929 ; Best: 0.812942 time spend on test method = 44.59s
+B 7E: test. Acc: 0.8318 ; Best: 0.831752 time spend on test method = 49.47s
 
 20E 10k 50k, bagging, lr=0.001
 ------------------------------
+ 20E: test. Acc: 0.8319 ; Best: 0.891304 time spend on test method = 49.38s
+B16E: test. Acc: 0.8984 ; Best: 0.898431 time spend on test method = 40.89s 
+
+30E 10k 50k, bagging, lr=0.001
+------------------------------
+B24: test. Acc: 0.9035 ; Best: 0.905460 time spend on test method = 37.91s
+
+100E 10k 50k, bagging, lr=0.001
+-------------------------------
+100 validate. Acc: 0.9373 ; Best: 0.949949 time spend on validate method = 1.49s 
+B95 test. Acc: 0.9513 ; Best: 0.951337 time spend on test method = 48.63s
