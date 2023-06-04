@@ -1,0 +1,10 @@
+ 7E 10k 50k, bagging, lr=0.001
+------------------------------
+test. Acc: 0.8318 ; Best: 0.831752 time spend on test method = 44.69s
+
+10E 10k 50k, bagging, lr=0.001
+------------------------------
+test. Acc: 0.7929 ; Best: 0.812942 time spend on test method = 44.59s
+
+20E 10k 50k, bagging, lr=0.001
+------------------------------

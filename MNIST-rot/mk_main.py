@@ -28,7 +28,7 @@ from torch.utils.data import Dataset, DataLoader
 from mkpyutils.testutil import time_spent
 from mk_mlutils.dataset import dataset_base
 from mk_mlutils.utils import torchutils
-from mk_mlutils.pipeline.batch import Bagging
+from mk_mlutils.pipeline.batch import Bagging, BatchBuilder
 from datasets.rotmnist import rotmnist
 
 #our shared modules is one level up
@@ -177,19 +177,20 @@ def main(args):
 	#valid_dataset = RotMNISTDataset(data['valid_x'], data['valid_y'])
 	
 	train_dataset = rotmnist.RotMNIST(split='train')
-	#train_dataset = RotMNISTDataset(split='train', device=device)
+	test_dataset = RotMNISTDataset(split='test', device=device)
 	valid_dataset = RotMNISTDataset(split='valid', device=device)
-	print(len(train_dataset), len(valid_dataset))
+	print(f" train {len(train_dataset)}, test {len(test_dataset)}, validate {len(valid_dataset)}")
 
 	bsize = args.batch_size
-	trainloader = DataLoader(train_dataset, batch_size=bsize, shuffle=True, drop_last=True)
+	#trainloader = DataLoader(train_dataset, batch_size=bsize, shuffle=True, drop_last=True)
+	testloader  = DataLoader(test_dataset, batch_size=bsize, drop_last=True)
 	validloader = DataLoader(valid_dataset, batch_size=bsize, drop_last=True)
 
 	if args.bagging:
 		trainloader = Bagging(train_dataset, 
 			batchsize=bsize, shuffle=False, drop_last=True
 		)
-
+		
 	# gathering parameters for training
 	lr = args.learning_rate
 	max_lr = 0.076		#for CyclicLR
@@ -206,9 +207,9 @@ def main(args):
 	params = trainingapp.TrainingParams(
 		device,
 		model,
-		trainloader,
-		validloader,
-		validloader,
+		train=trainloader,
+		test=testloader,
+		validate=validloader,
 		batchsize = args.batch_size, 			#46
 		validate_batchsize = args.batch_size,	#bsize for validate and test runs
 		epochs = args.n_epochs,
@@ -223,15 +224,25 @@ def main(args):
 	print('No. of batches : ', len(trainloader))
 	print(f'Starting the training......{args.n_epochs}')
 
-	# Training phase
-	trainingapp.train(
+	# Training (10k) phase
+	val_best, best_path = trainingapp.train(
 		params,
 		model, 
 		trainloader,
 		device,
 		split='train'
 	)
+	print(" ")
 
+	# Test (50k) phase
+	trainingapp.validate(
+		params,
+		model, 
+		testloader,
+		device,
+		args.n_epochs,
+		split='test'
+	)
 
 if __name__ == '__main__':
 	#1. get shared args

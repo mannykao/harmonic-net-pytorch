@@ -83,6 +83,7 @@ class TrainingParams():
 		self.train_set 	= self.params['train'].dataset
 		self.test_set	= self.params['test'].dataset
 		self.val_set 	= self.params['validate'].dataset
+		self.best_path  = ""
 
 	@property
 	def params(self):
@@ -102,13 +103,15 @@ def train(
 	trainloader,
 	device,
 	split:str='train'
-) -> Tuple[float, float]:
+) -> Tuple[float, Path]:
 
 	lr 		 = params['lr']
 	max_lr 	 = params['max_lr']
 	n_epochs = params['epochs']
 	batch_size = params['batchsize']
 	validloader = params['validate']
+
+	print(f"train({n_epochs})")
 
 	train_dataset = params.train_set
 	val_dataset   = params.val_set
@@ -174,7 +177,7 @@ def train(
 			tic1 = time_spent(tic1, 'train')
 
 		# Validation phase
-		val_best, _ = validate(
+		val_best = validate(
 			params,
 			model, 
 			validloader,
@@ -182,7 +185,9 @@ def train(
 			epoch=epoch,
 			split='validate',
 		)
+		best_path =	params['best_path']
 
+	return val_best, best_path
 
 def validate(
 	params:TrainingParams,
@@ -190,8 +195,8 @@ def validate(
 	validloader,
 	device,
 	epoch:int,
-	split:str='validate',
-) -> Tuple[float, float]:
+	split:str='Val',
+) -> Tuple[float]:
 
 	batch_size	= params['batchsize']
 	val_best	= params['val_best']
@@ -199,6 +204,8 @@ def validate(
 
 	tic0 = time.time()
 	# Validation phase
+	save_path = None
+
 	model.eval()
 	with torch.no_grad():
 		val_acc = 0.0
@@ -216,16 +223,18 @@ def validate(
 
 		if val_acc > val_best:
 			val_best = val_acc
-			params.params['val_best'] = val_best
 
 			# save the cuurrent model
 			save_path = model_path/f"model_{epoch}.pth"
 			torch.save(model.state_dict(), save_path)
 
-		print(f"; Val. Acc: {val_acc:.4f} ; Best: {val_best:4f} ", end="")
-		tic1 = time_spent(tic0, 'validate')	
+			params.params['val_best'] = val_best
+			params.params['best_path'] = save_path
 
-	return val_best, tic1
+		print(f"; {split}. Acc: {val_acc:.4f} ; Best: {val_best:4f} ", end="")
+		tic1 = time_spent(tic0, split)	
+
+	return val_best
 		
 
 def shared_args(description='H-net for RotMNIST', extras:List[Tuple] =[]) -> argparse.ArgumentParser:
