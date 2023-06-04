@@ -16,6 +16,7 @@ import os
 import random
 import sys
 import time
+from pathlib import Path
 from urllib.request import urlopen
 import zipfile
 
@@ -210,8 +211,10 @@ def main(args):
 		validloader,
 		batchsize = args.batch_size, 			#46
 		validate_batchsize = args.batch_size,	#bsize for validate and test runs
+		epochs = args.n_epochs,
 		lr = lr, max_lr = max_lr,
 		val_best = 0.0,
+		snapshot=Path(args.model_path),
 	)
 
 	# print model parameters count
@@ -220,73 +223,14 @@ def main(args):
 	print('No. of batches : ', len(trainloader))
 	print(f'Starting the training......{args.n_epochs}')
 
-	# Optimizer
-	optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-	#optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9)
-
-	#lr scheduler
-	#lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.1)
-	lr_scheduler = torch.optim.lr_scheduler.CyclicLR(
-		optimizer, base_lr=lr, max_lr=max_lr, step_size_up=20, 
-		mode='triangular2', cycle_momentum=False
+	# Training phase
+	trainingapp.train(
+		params,
+		model, 
+		trainloader,
+		device,
+		split='train'
 	)
-	lossfn = torch.nn.CrossEntropyLoss() # defining the loss function
-
-	# Starting to train the model
-	for epoch in range(args.n_epochs):
-		tic1 = time.time()
-
-		if args.train_mode:
-			# Training phase
-			model.train()
-
-			epoch_loss = 0
-			epoch_acc = 0
-
-			correct = 0
-			for idx, batch in enumerate(trainloader):
-				images = batch[0]
-				labels = batch[1]
-
-				# Transfer to GPU
-				if args.bagging:
-					images = torch.from_numpy(images)
-					labels = torch.from_numpy(np.asarray(labels, dtype=np.int64))
-				images, labels = images.to(device), labels.to(device)
-				labels = labels.type(torchutils.LongTensor)
-
-				optimizer.zero_grad()
-				logits = model(images)
-				correct += (torch.argmax(logits, dim=1).type(labels.dtype)==labels).sum().item()
-
-				#loss = lossfn(logits, labels)
-				loss = F.nll_loss(F.log_softmax(logits, dim=1), labels, reduction='sum')
-				epoch_loss += loss.item()
-				loss.backward()
-
-				optimizer.step()
-
-			current_lr = lr_scheduler.get_last_lr()[0]
-			if (epoch > 0) and (epoch % 100 == 0):		
-				lr_scheduler.step()		#scheduler.step() should be after optimizer.step()
-
-			epoch_acc = correct / (len(trainloader)*args.batch_size)
-			epoch_loss /= len(train_dataset)
-#			current_lr = lr_scheduler.get_lr()[0]
-#			print('Epoch: ', epoch+1, '; lr: ', current_lr, '; Loss: ', epoch_loss, '; Train Acc: ', epoch_acc, end = " ")
-			print(f"Epoch: {epoch+1} ; lr: {current_lr:.4f} ; Loss:  {epoch_loss:.4f} ; Train Acc: {epoch_acc:.4f}", end = " ")
-			tic1 = time_spent(tic1, 'train')
-
-		# Validation phase
-		val_best, _ = trainingapp.validate(
-			params,
-			model, 
-			validloader,
-			args.model_path,
-			device,
-			epoch,
-			split='validate',
-		)
 
 
 if __name__ == '__main__':

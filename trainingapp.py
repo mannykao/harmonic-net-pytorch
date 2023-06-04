@@ -8,9 +8,10 @@ Created on Wed Feb 1 17:44:29 2023
 import argparse, time
 from pathlib import Path
 from typing import Tuple, Callable, Iterable, List, Any, Dict, Union, Optional
-#import numpy as np
+import numpy as np
 import torch
 from torch import nn
+import torch.nn.functional as F
 
 from mkpyutils.testutil import time_spent
 from mk_mlutils.utils import torchutils
@@ -31,6 +32,7 @@ class TrainingParams():
 		validate,
 		batchsize: int = 46,
 		validate_batchsize: int = 46,	#bsize for validate and test runs
+		epochs:int = 2,
 		lr: float = 0.001,
 		max_lr: float = 0.076,
 		lr_schedule: bool = False,
@@ -39,6 +41,7 @@ class TrainingParams():
 		trset: Optional[str] = "test",
 		seed: Optional[int] = 1,
 		val_best:float = 0.0,
+		model_path:str = "",
 		**kwargs
 	):
 		self._params = {
@@ -50,13 +53,15 @@ class TrainingParams():
 			'validate': validate,
 			'batchsize': 	batchsize,
 			'validate_batchsize': validate_batchsize,
+			'epochs':		epochs,
 			'lr': 			lr,
+			'max_lr':		max_lr,
 			'lr_schedule':	lr_schedule,
-			'snapshot': snapshot,
-			'datasetname': datasetname,
-			'trset': trset,
-			'seed': seed,
-			'val_best': val_best,
+			'snapshot': 	snapshot,
+			'datasetname': 	datasetname,
+			'trset': 		trset,
+			'seed': 		seed,
+			'val_best': 	val_best,
 		}
 		self.check_params()
 		self.amend(**kwargs)
@@ -95,19 +100,20 @@ def train(
 	params:TrainingParams,
 	model:nn.Module, 
 	trainloader,
-	model_path:str,
 	device,
-	epoch:int,
 	split:str='train'
 ) -> Tuple[float, float]:
 
 	lr 		 = params['lr']
 	max_lr 	 = params['max_lr']
-	n_epochs = params['n_epochs']
+	n_epochs = params['epochs']
 	batch_size = params['batchsize']
+	validloader = params['validate']
+
 	train_dataset = params.train_set
 	val_dataset   = params.val_set
 
+	train_mode = True
 	bagging = isinstance(trainloader, Bagging)
 
 	# Optimizer
@@ -126,7 +132,7 @@ def train(
 	for epoch in range(n_epochs):
 		tic1 = time.time()
 
-		if args.train_mode:
+		if train_mode:
 			# Training phase
 			model.train()
 
@@ -167,11 +173,21 @@ def train(
 			print(f"Epoch: {epoch+1} ; lr: {current_lr:.4f} ; Loss:  {epoch_loss:.4f} ; Train Acc: {epoch_acc:.4f}", end = " ")
 			tic1 = time_spent(tic1, 'train')
 
+		# Validation phase
+		val_best, _ = validate(
+			params,
+			model, 
+			validloader,
+			device,
+			epoch=epoch,
+			split='validate',
+		)
+
+
 def validate(
 	params:TrainingParams,
 	model:nn.Module, 
 	validloader,
-	model_path:str,
 	device,
 	epoch:int,
 	split:str='validate',
@@ -179,6 +195,7 @@ def validate(
 
 	batch_size	= params['batchsize']
 	val_best	= params['val_best']
+	model_path	= params['snapshot']
 
 	tic0 = time.time()
 	# Validation phase
@@ -202,7 +219,7 @@ def validate(
 			params.params['val_best'] = val_best
 
 			# save the cuurrent model
-			save_path = model_path + '/model_' + str(epoch) + '.pth'
+			save_path = model_path/f"model_{epoch}.pth"
 			torch.save(model.state_dict(), save_path)
 
 		print(f"; Val. Acc: {val_acc:.4f} ; Best: {val_best:4f} ", end="")
@@ -214,7 +231,7 @@ def validate(
 def shared_args(description='H-net for RotMNIST', extras:List[Tuple] =[]) -> argparse.ArgumentParser:
 	parser = argparse.ArgumentParser(description=description)
 	parser.add_argument("--learning_rate", type=float, default=0.001, help='initially learning rate')		 	#0.076 - mck this is now the starting lr
-	parser.add_argument("--n_epochs", type=int, default=20)
+	parser.add_argument("--n_epochs", type=int, default=2)
 	parser.add_argument('--bagging', action = 'store_true', default=True, help='Bagging or DataLoader for minibatch.')
 	return parser
 
