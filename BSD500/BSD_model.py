@@ -32,7 +32,7 @@ def hnet_bsd(args, x, train_phase):
     tp = train_phase
     std = args.std_mult
 
-    x = tf.reshape(x, shape=[bs,args.height,args.width,1,1,3])
+    x = tf.reshape(x, shape=[bs, args.height, args.width, 1,1,3])
     fm = {}
 
     # Convolutional Layers
@@ -178,7 +178,7 @@ def vgg_bsd(args, x, train_phase):
 def linear(x, n_out, ksize, bias_init=None, strides=(1,1,1,1), padding='SAME', name=''):
     """Basic linear matmul layer"""
     xsh = x.get_shape()
-    shape = [ksize,ksize,xsh[3],n_out]
+    shape = [ksize, ksize, xsh[3], n_out]
     He_initializer = tf.contrib.layers.variance_scaling_initializer()
     W = tf.get_variable(name+'_W', shape=shape, initializer=He_initializer)
     z = tf.nn.conv2d(x, W, strides=strides, padding=padding, name='mul'+str(name))

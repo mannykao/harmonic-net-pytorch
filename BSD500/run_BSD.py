@@ -50,6 +50,7 @@ def settings(args):
       data['valid_x'] = load_pkl(os.path.join(args.data_dir, 'test_images.pkl'))
       data['valid_y'] = load_pkl(os.path.join(args.data_dir, './data/bsd_pkl_float/test_labels.pkl'))
    args.display_step = len(data['train_x'])/46
+   
    # Default configuration
    if args.default_settings:
       args.n_epochs = 250

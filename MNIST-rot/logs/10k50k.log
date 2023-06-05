@@ -20,3 +20,8 @@ B24: test. Acc: 0.9035 ; Best: 0.905460 time spend on test method = 37.91s
 -------------------------------
 100 validate. Acc: 0.9373 ; Best: 0.949949 time spend on validate method = 1.49s 
 B95 test. Acc: 0.9513 ; Best: 0.951337 time spend on test method = 48.63s
+
+2100E 10k 50k, bagging, lr=0.001
+-------------------------------
+B195: test. Acc: 0.9550 ; Best: 0.955020 time spend on test method = 49.14s
+ 
