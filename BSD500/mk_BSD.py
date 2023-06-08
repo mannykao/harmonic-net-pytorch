@@ -59,15 +59,20 @@ class RandomFlip(BaseXform):
 			2: self.flip_lr,
 		}
 		self.seed = seed
-		self.setNumpyRandomState_(seed)
+		self.setRandom(seed)
 		return
 		
 	def __repr__(self):
 		return f"RandomFlip({self.seed=})"
 	
-	def setNumpyRandomState_(self, seed: Union[None, int] = None):
+	def setRandom(self, seed: Union[None, int] = None):
 		s = seed if seed else self.seed
-		self.ran = np.random.RandomState(s)
+		#self.ran = np.random.RandomState(s) 	#this will soon be deprecated
+
+		ss = np.random.SeedSequence(seed)
+		#num_workers = 1		#TODO: for MP code
+		#child_seeds = ss.spawn(num_workers)
+		self.ran = np.random.Generator(np.random.PCG64(ss))  #|MT19937
 		return
 	
 	def noop(self, images):
@@ -80,7 +85,7 @@ class RandomFlip(BaseXform):
 		return np.flip(images, axis = 2)
 	
 	def __call__(self, images):
-		op_index = self.ran.randint(0, 3)
+		op_index = self.ran.integers(0, 3)
 		return self.flip_ops[op_index](images)
 
 def getBSD500(kPlot=False):
