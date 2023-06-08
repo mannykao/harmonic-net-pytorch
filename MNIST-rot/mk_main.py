@@ -221,7 +221,7 @@ def main(args):
 	# print model parameters count
 	pytorch_n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
 	print('Total trainable params : ', pytorch_n_params)
-	print('No. of batches : ', len(trainloader))
+	print('No. of batches : ', int(len(trainloader)/args.batch_size))
 	print(f'Starting the training......{args.n_epochs}')
 
 	# Training (10k) phase
@@ -235,21 +235,20 @@ def main(args):
 	print(" ")
 	print(f"Best {val_best:.4f} {best_path=}")
 
-	#noext = Path(os.path.splitext(best_path)[0])
-	#torchutils.load_snapshot(device, model, str(noext))
+	if args.best:
+		snapshot = torch.load(best_path)
+		model.load_state_dict(snapshot)
 
-	snapshot = torch.load(best_path)
-	model.load_state_dict(snapshot)
+		# Test (50k) phase
+		trainingapp.validate(
+			params,
+			model, 
+			testloader,
+			device,
+			args.n_epochs,
+			split='test'
+		)
 
-	# Test (50k) phase
-	trainingapp.validate(
-		params,
-		model, 
-		testloader,
-		device,
-		args.n_epochs,
-		split='test'
-	)
 
 if __name__ == '__main__':
 	#1. get shared args

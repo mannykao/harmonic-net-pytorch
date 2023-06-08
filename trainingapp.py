@@ -102,7 +102,7 @@ def train(
 	model:nn.Module, 
 	trainloader,
 	device,
-	split:str='train'
+	split:str='train',
 ) -> Tuple[float, Path]:
 
 	lr 		 = params['lr']
@@ -242,6 +242,7 @@ def shared_args(description='H-net for RotMNIST', extras:List[Tuple] =[]) -> arg
 	parser.add_argument("--learning_rate", type=float, default=0.001, help='initially learning rate')		 	#0.076 - mck this is now the starting lr
 	parser.add_argument("--n_epochs", type=int, default=2)
 	parser.add_argument('--bagging', action = 'store_true', default=True, help='Bagging or DataLoader for minibatch.')
+	parser.add_argument('--best', type=int, default=1, help='Load best snapshot.')
 	return parser
 
 
